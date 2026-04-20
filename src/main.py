@@ -1,47 +1,29 @@
-from commands.commands import *
+import subprocess
 
+
+# Funções de utils
+from src.modules.utils import get_entry, alert
+
+# Banners
+from src.modules.banners import BANNER
 
 class Prometheus:
     def __init__(self):
-        os.system(f'cls && title {TOOL_TITLE}')
-        print(TITLE_BANNER())
+        subprocess.run("title Prometheus CLI && cls", shell=True)
+        print(BANNER())
 
+        self.decision()
+
+    def decision(self):
+        """Loop principal e decisão dos comandos"""
         while True:
-            try:
-                self.user_entry = input_cmds(fg_error)
-                self.dispatch()
-            
-            except KeyboardInterrupt:
-                alert('info', f"Comando cancelado! Se quiser fechar a ferramenta use {fg_success}exit {fg_text}se estiver com dúvidas use {fg_success}help")
+            entries = get_entry()
 
-            except ValueError as e:
-                alert('error', e)
-            
-            except FileNotFoundError as e:
-                alert('error', e)
-
-            except CommandNotFoundError as e:
-                alert('error', e)
-
-            except Exception as e:
-                alert('error', e)
-
-    def dispatch(self):
-        cmd = self.user_entry[0]
-
-        # Verificar a existencia do comando
-        if cmd in DEFAULT_COMMANDS:
-            command = DEFAULT_COMMANDS.get(cmd)
-
-        elif cmd in SPECIAL_COMMANDS:
-            command = SPECIAL_COMMANDS.get(cmd)
-
-        else:
-            raise CommandNotFoundError(cmd)
-        
-        # Se existir, executa
-        command['handler']()
+            print(entries)
 
 
 if __name__ == '__main__':
-    Prometheus()
+    try:
+        Prometheus()
+    except KeyboardInterrupt:
+        alert('info', "Saindo...")

@@ -1,3 +1,5 @@
 @echo off
-:run
-.venv\Scripts\activate.bat && python src\main.py
+@chcp 65001 > nul
+title Prometheus CLI Tool
+
+.venv\Scripts\activate && python -m src.main
