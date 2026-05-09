@@ -1,25 +1,30 @@
-from core.config import ALERT_SCHEMES, FG_TEXT
 
+# Contantes
+from core.config import ALERT_SCHEMES, AUTHOR, TOOL_NAME
 
-def alert(type, text):
+# Colors
+from core.config import FG_TEXT, FG_ONE, FG_TWO
+
+def alert(type_alert, text):
     """Exibe alertas personalizados"""
 
-    if type in ALERT_SCHEMES:
-        color = ALERT_SCHEMES[type]
-        print(f"{color}[{type}] {FG_TEXT}{text}")
+    if type_alert in ALERT_SCHEMES:
+        color = ALERT_SCHEMES[type_alert]
+        print(f"{color}[{type_alert.upper()}] {FG_TEXT}{text}")
 
 
 
 def get_entry(text = None):
-    """Função para receber entradas do usuário"""
+    """Recebe as entradas do usuário"""
 
     if not text:
-        text = '<'
-
-    entry = input(f"{text} > ")
+        text = ''
+    
+    print(f'{FG_ONE}┌─({FG_TWO}{TOOL_NAME}{FG_ONE})~[{FG_TWO}{AUTHOR}{FG_ONE}]')
+    entry = input(f"└───> {text} < {FG_TWO}")
 
     if not entry:
-        print("Por favor digite alguma coisa!")
+        alert('error', "Por favor informe um comando válido ou digite 'help'")
 
     entries = entry.split()
 

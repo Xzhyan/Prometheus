@@ -6,9 +6,9 @@ from core.config import FG_TEXT, FG_TITLE, FG_ONE, FG_TWO, FG_SUCCESS, FG_ERROR,
 
 
 def BANNER():
-    return """
+    return f"""{FG_ONE}
 ┏┓┳┓┏┓┳┳┓┏┓┏┳┓┓┏┏┓┳┳┏┓
 ┃┃┣┫┃┃┃┃┃┣  ┃ ┣┫┣ ┃┃┗┓
 ┣┛┛┗┗┛┛ ┗┗┛ ┻ ┛┗┗┛┗┛┗┛
-
+Developed by {FG_TWO}{AUTHOR} {FG_ONE}<:> version: {FG_TWO}{VERSION}
     """
