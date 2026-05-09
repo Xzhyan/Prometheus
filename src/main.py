@@ -1,29 +1,41 @@
-import subprocess
+from core import settings
 
+# utils/console
+from utils.console import clear, title, close, entry
 
-# Funções de utils
-from src.modules.utils import get_entry, alert
+# ui/console
+from ui.console import response
 
 # Banners
-from src.modules.banners import BANNER
+from ui.banners import TOOL_BANNER
 
-class Prometheus:
+
+class Main:
     def __init__(self):
-        subprocess.run("title Prometheus CLI && cls", shell=True)
-        print(BANNER())
+        clear()
+        title(settings.TOOL_NAME)
+        print(TOOL_BANNER)
+        self.startup()
 
-        self.decision()
 
-    def decision(self):
-        """Loop principal e decisão dos comandos"""
+    def startup(self):
         while True:
-            entries = get_entry()
+            cmd = entry()
 
-            print(entries)
+            if not cmd:
+                continue
+
+            if cmd[0] == 'exit':
+                response('info', "Encerrando a ferramenta...")
+                close()
+
+
 
 
 if __name__ == '__main__':
     try:
-        Prometheus()
+        Main()
+
     except KeyboardInterrupt:
-        alert('info', "Saindo...")
+        response('info', "Encerrando a ferramenta...")
+        close()
