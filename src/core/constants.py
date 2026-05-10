@@ -1,6 +1,7 @@
 from pathlib import Path
 from colorama import Fore as fg
 
+
 # Caminho absoluto da tool
 BASE_DIR = Path(__file__).resolve().parent.parent
 
