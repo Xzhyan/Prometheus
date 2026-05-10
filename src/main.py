@@ -6,8 +6,12 @@ from utils.console import clear, title, close, entry
 # ui/console
 from ui.console import response
 
-# Banners
+# ui/banners
 from ui.banners import TOOL_BANNER
+
+# commnds
+from commands.default import DEFAULT_COMMANDS
+from commands.shortcut import SHORTCUT_COMMANDS
 
 
 class Main:
@@ -15,21 +19,30 @@ class Main:
         clear()
         title(settings.TOOL_NAME)
         print(TOOL_BANNER)
-        self.startup()
+
+        # Onde os comandos vão ser de fato expedidos
+        self.dispatch()
 
 
-    def startup(self):
+    def dispatch(self):
+        """Faz a expedição dos comandos"""
+
         while True:
-            cmd = entry()
+            args = entry()
 
-            if not cmd:
+            if not args:
                 continue
 
-            if cmd[0] == 'exit':
-                response('info', "Encerrando a ferramenta...")
-                close()
+            cmd = args[0]
 
+            if cmd in DEFAULT_COMMANDS:
+                DEFAULT_COMMANDS[cmd]['func']()
 
+            elif cmd in SHORTCUT_COMMANDS:
+                SHORTCUT_COMMANDS[cmd]['func']()
+
+            else:
+                response('error', "Comando inexistente")
 
 
 if __name__ == '__main__':
