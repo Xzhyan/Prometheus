@@ -7,7 +7,7 @@ ENTRY = f"{Colors.PRIMARY}┌─({Colors.SECONDARY}{settings.TOOL_NAME}{Colors.P
 
 
 def response(res_type, text):
-    """Resposta personaliza com tipos (erro, sucesso, info)"""
+    """Resposta personaliza por tipos (erro, sucesso, info)"""
 
     res_type_color = RESPONSE_DICT.get(res_type.lower(), Colors.TEXT)
 

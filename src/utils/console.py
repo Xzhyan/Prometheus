@@ -31,7 +31,7 @@ def entry():
     
     try:
         print(ENTRY)
-        get_entry = input("    > ")
+        get_entry = input(f"    > {Colors.TEXT}")
 
         if not get_entry:
             return None
