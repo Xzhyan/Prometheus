@@ -1,10 +1,13 @@
-import subprocess, platform, sys
+import subprocess, platform, sys, os
 
 # core/constants
 from core.constants import Colors
 
 # ui/console
 from ui.console import ENTRY
+
+# core/excpetions
+from core.exceptions import PathNotFoundError
 
 
 def clear():
@@ -43,3 +46,10 @@ def entry():
 
     except EOFError:
         return ['exit']
+
+
+def verify_path(path):
+    """Verifica a existencia de paths"""
+
+    if not os.path.exists(path):
+        raise PathNotFoundError(path)
