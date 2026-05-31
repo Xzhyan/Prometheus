@@ -1,7 +1,7 @@
 import subprocess, platform, sys, os
 
 # core/constants
-from core.constants import Colors
+from core.constants import Colors, BASE_DIR
 
 # ui/console
 from ui.console import ENTRY
@@ -53,3 +53,31 @@ def verify_path(path):
 
     if not os.path.exists(path):
         raise PathNotFoundError(path)
+
+
+def run_subprocess(path):
+    py_path = os.path.join('.venv', 'Scripts', 'python.exe')
+
+    try:
+        verify_path(path)
+        verify_path(py_path)
+
+        abs_path = os.path.abspath(path)
+
+        subprocess.Popen(
+            [py_path, abs_path],
+            cwd=os.path.dirname(abs_path),
+            creationflags=subprocess.CREATE_NEW_CONSOLE
+        )
+
+    except PathNotFoundError as e:
+        print(f"\n{e}\n")
+
+    except FileNotFoundError as e:
+        print(f"\nArquivo não encontado: \n{e}\n")
+
+    except OSError as e:
+        print(f"\nErro do sistema: \n{e}\n")
+    
+    except Exception as e:
+        print(f"\nErro desconhecido: \n{e}\n")

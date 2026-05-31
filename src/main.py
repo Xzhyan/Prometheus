@@ -12,6 +12,7 @@ from ui.banners import TOOL_BANNER
 # commnds
 from commands.default import DEFAULT_COMMANDS
 from commands.shortcut import SHORTCUT_COMMANDS
+from commands.downloaders import DOWNLOADERS_COMMANDS
 
 
 class Main:
@@ -40,6 +41,9 @@ class Main:
 
             elif cmd in SHORTCUT_COMMANDS:
                 SHORTCUT_COMMANDS[cmd]['func']()
+
+            elif cmd in DOWNLOADERS_COMMANDS:
+                DOWNLOADERS_COMMANDS[cmd]['func']()
 
             else:
                 response('error', "Comando inexistente")
