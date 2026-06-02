@@ -14,3 +14,5 @@ def alert(type_, message):
     color = colors.get(type_, Colors.TEXT)
 
     print(f'{color}[{type_.upper()}] {Colors.TEXT}- {message}')
+
+
