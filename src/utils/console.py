@@ -12,7 +12,7 @@ def shutdown():
     """Finalizar a ferramenta"""
 
     alert('info', "Finalizando...")
-    return False
+    sys.exit(0)
 
 
 def clear():

@@ -1,3 +1,16 @@
+
 class InvalidCommandError(Exception):
-    def __init__(self, message = "Informe um comando válido. Use help para ver a lista de comandos."):
+    def __init__(
+            self,
+            message="Informe um comando válido."
+    ):
         super().__init__(message)
+
+
+class CommandNotFoundError(Exception):
+    def __init__(
+            self,
+            message="Comando não encontrado."
+    ):
+        super().__init__(message)
+
