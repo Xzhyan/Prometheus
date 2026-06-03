@@ -29,10 +29,9 @@ def entry():
     """Recebe a entrada do usuário e retorna em argumentos"""
 
     print(f" {Colors.ONE}┌─({Colors.TEXT}{settings.TOOL_NAME}{Colors.ONE})-[]")
-    entry = input(f" {Colors.TITLE} └{Colors.TEXT}")
+    entry = input(f" {Colors.TITLE}└⇘⇘⇘ {Colors.TEXT}")
     
     if not entry:
         raise InvalidCommandError()
 
     return entry.split()
-

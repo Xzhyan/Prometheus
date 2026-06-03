@@ -2,8 +2,11 @@ from pathlib import Path
 from colorama import Fore as fg
 
 
-# caminho absoluto da ferramenta, 'fora do src'
+# Caminho absoluto da ferramenta, 'fora do src'
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
+
+# Caminho dos logs
+LOG_DIR = BASE_DIR / 'logs'
 
 
 class Colors:
@@ -22,6 +25,3 @@ class Colors:
     # cores da ferramenta
     ONE = fg.RED
     TWO = fg.WHITE
-
-
-

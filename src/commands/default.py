@@ -1,13 +1,14 @@
-from utils.console import shutdown, clear
+from utils.system import shutdown, clear
 
 
 DEFAULT_COMMANDS = {
     'exit': {
         'desc': "Finalizar a ferramenta",
-        'run': shutdown
+        'handler': shutdown
     },
     'clear': {
         'desc': "Limpar a tela",
-        'run': clear
+        'handler': clear
     }
 }
+
