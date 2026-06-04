@@ -11,4 +11,3 @@ DEFAULT_COMMANDS = {
         'handler': clear
     }
 }
-

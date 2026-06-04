@@ -1,6 +1,10 @@
 from pathlib import Path
 from colorama import Fore as fg
+import os, getpass
 
+
+# Nome de usuário da máquina
+USERNAME = getpass.getuser()
 
 # Caminho absoluto da ferramenta, 'fora do src'
 BASE_DIR = Path(__file__).resolve().parent.parent.parent

@@ -2,7 +2,7 @@ import subprocess, platform, sys
 
 # core
 from core import settings
-from core.constants import Colors
+from core.constants import Colors, USERNAME
 
 # core/exceptions
 from core.exceptions import InvalidCommandError
@@ -28,7 +28,7 @@ def clear():
 def entry():
     """Recebe a entrada do usuário e retorna em argumentos"""
 
-    print(f" {Colors.ONE}┌─({Colors.TEXT}{settings.TOOL_NAME}{Colors.ONE})-[]")
+    print(f"\n {Colors.ONE}┌─({Colors.TEXT}{settings.TOOL_NAME}{Colors.ONE})-[{Colors.TEXT}{USERNAME}{Colors.ONE}]")
     entry = input(f" {Colors.TITLE}└⇘⇘⇘ {Colors.TEXT}")
     
     if not entry:
