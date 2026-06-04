@@ -1,11 +1,12 @@
 import subprocess, platform, sys
+from pathlib import Path
 
-# core
+# core, exceptions, dependencies, logger
 from core import settings
-from core.constants import Colors, USERNAME
-
-# core/exceptions
-from core.exceptions import InvalidCommandError
+from core.constants import Colors, USERNAME, BASE_DIR
+from core.exceptions import InvalidCommandError, PathNotFoundError, FilePathNotFoundError
+from core.dependencies import file_check, path_check
+from core.logger import add_log
 
 # ui
 from ui.ui_console import alert
@@ -44,8 +45,40 @@ def list_commands(category):
         print(f"    {Colors.TITLE}{cmd} {Colors.TEXT}-> {data['desc']}")
 
 
-def run_module(path):
-    subprocess.Popen(
-        [sys.executable, '-m', f'{path}.py']
-    )
+def run_module(path, name):
+    module = BASE_DIR / path / name
 
+    try:
+        file_check(module)
+        
+        subprocess.Popen(
+            [sys.executable, str(module)],
+            creationflags=subprocess.CREATE_NEW_CONSOLE
+        )
+
+    except FilePathNotFoundError as e:
+        add_log('error', str(e))
+        alert('error', str(e))
+
+    except Exception as e:
+        add_log('error', str(e))
+
+
+# modelo para run module admin e verificador
+# def run_module_admin(module):
+#     ctypes.windll.shell32.ShellExecuteW(
+#         None,
+#         "runas",
+#         sys.executable,
+#         str(module),
+#         None,
+#         1
+#     )
+
+# import ctypes
+
+# def is_admin():
+#     try:
+#         return ctypes.windll.shell32.IsUserAnAdmin()
+#     except:
+#         return False

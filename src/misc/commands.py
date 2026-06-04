@@ -1,5 +1,9 @@
-from utils.system import shutdown, clear
+# utils
+from utils.system import shutdown, clear, run_module
 
+
+def port_scan():
+    run_module('src/misc/cybersec', 'portscan.py')
 
 
 DEFAULT_COMMANDS = {
@@ -17,7 +21,7 @@ DEFAULT_COMMANDS = {
 CYBERSEC_COMMANDS = {
     'portscan': {
         'desc': "Escaner de portas",
-        'handler': 'port_scan'
+        'handler': port_scan
     },
 }
 

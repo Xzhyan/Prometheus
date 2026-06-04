@@ -5,7 +5,6 @@ from pathlib import Path
 from .exceptions import PathNotFoundError, FilePathNotFoundError
 
 
-
 def path_check(path):
     path = Path(path)
 

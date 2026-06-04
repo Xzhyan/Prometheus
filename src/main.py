@@ -38,6 +38,9 @@ class Main:
                 elif command in DEFAULT_COMMANDS:
                     DEFAULT_COMMANDS[command]['handler']()
 
+                elif command in CYBERSEC_COMMANDS:
+                    CYBERSEC_COMMANDS[command]['handler']()
+
                 else:
                     raise CommandNotFoundError()
 
