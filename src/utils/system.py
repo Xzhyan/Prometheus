@@ -35,3 +35,17 @@ def entry():
         raise InvalidCommandError()
 
     return entry.split()
+
+
+def list_commands(category):
+    """Faz a lsitagem dos comandos"""
+
+    for cmd, data in category.items():
+        print(f"    {Colors.TITLE}{cmd} {Colors.TEXT}-> {data['desc']}")
+
+
+def run_module(path):
+    subprocess.Popen(
+        [sys.executable, '-m', f'{path}.py']
+    )
+

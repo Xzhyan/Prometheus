@@ -8,10 +8,10 @@ from ui.banners import Banner
 from ui.ui_console import alert
 
 # utils
-from utils.system import entry
+from utils.system import entry, list_commands
 
 # commands
-from commands.default import DEFAULT_COMMANDS, shutdown, clear
+from misc.commands import DEFAULT_COMMANDS, CYBERSEC_COMMANDS, shutdown, clear
 
 
 
@@ -32,6 +32,8 @@ class Main:
 
                 if command == 'help':
                     print(Banner.HELP_MENU)
+                    list_commands(DEFAULT_COMMANDS)
+                    list_commands(CYBERSEC_COMMANDS)
 
                 elif command in DEFAULT_COMMANDS:
                     DEFAULT_COMMANDS[command]['handler']()

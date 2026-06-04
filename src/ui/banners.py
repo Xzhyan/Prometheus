@@ -9,13 +9,13 @@ class Banner:
                           ┏━┓┏━┓┏━┓┏┳┓┏━╸╺┳╸╻ ╻┏━╸╻ ╻┏━┓
                           ┣━┛┣┳┛┃ ┃┃┃┃┣╸  ┃ ┣━┫┣╸ ┃ ┃┗━┓
                           ╹  ╹┗╸┗━┛╹ ╹┗━╸ ╹ ╹ ╹┗━╸┗━┛┗━┛
-                         {Colors.TITLE}Developed by {Colors.TEXT}{settings.AUTHOR} {Colors.TITLE}- ver: {Colors.TEXT}{settings.VERSION}"""
+                         {Colors.TEXT}Developed by {Colors.TITLE}{settings.AUTHOR} {Colors.TEXT}- ver: {Colors.TITLE}{settings.VERSION}"""
 
-    HELP_MENU = f"""
-    Bem-vindo ao menu de ajuda da ferramenta {settings.TOOL_NAME}
+    HELP_MENU = f"""{Colors.TEXT}
+    Bem-vindo ao menu de ajuda da ferramenta {Colors.TITLE}{settings.TOOL_NAME}{Colors.TEXT}
 
-    A ferramenta foi desenvolvida para automatizar tarefas na plataforma Windows, disponibilizar funcionalidades avançadas e futuramente ter recursos para segurança cibernética.
+    A ferramenta foi desenvolvida para automatizar tarefas no OS Windows;
+    Disponibilizar funcionalidades avançadas; e
+    Futuramente ter recursos para segurança cibernética;
     
-    Lista de comandos: (obs: estão separados por categorias)
-
-    """
+    Lista de comandos:"""

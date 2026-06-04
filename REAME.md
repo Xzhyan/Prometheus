@@ -4,6 +4,38 @@
 
 ## Developed by Xzhan DEV.
 
+## Comandos da ferramenta
+
+### Default
+- clear
+- exit
+
+### System
+- clear temp files
+
+
+### Downloaders
+- youtube downloader
+- instagram downloader
+- pinterest downloader
+
+
+### System/Network Defense
+- IDS
+- IPS
+- Firewall
+
+
+### Cybersec
+- port scan
+- ip scan
+
+
+### Diversos
+- wallpapers
+- games
+
+
 ---
 
 # .env

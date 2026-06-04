@@ -14,3 +14,10 @@ class CommandNotFoundError(Exception):
     ):
         super().__init__(message)
 
+
+class FilePathNotFoundError(Exception):
+    pass
+
+
+class PathNotFoundError(Exception):
+    pass

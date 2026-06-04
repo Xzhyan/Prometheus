@@ -1,6 +1,7 @@
 from utils.system import shutdown, clear
 
 
+
 DEFAULT_COMMANDS = {
     'exit': {
         'desc': "Finalizar a ferramenta",
@@ -11,3 +12,12 @@ DEFAULT_COMMANDS = {
         'handler': clear
     }
 }
+
+
+CYBERSEC_COMMANDS = {
+    'portscan': {
+        'desc': "Escaner de portas",
+        'handler': 'port_scan'
+    },
+}
+

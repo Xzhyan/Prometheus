@@ -38,4 +38,3 @@ def add_log(name, message):
 
     new_log = setup_logger(name, f'{name}.log')
     new_log.info(message)
-
