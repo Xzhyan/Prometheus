@@ -24,8 +24,8 @@ class Colors:
 
     # cores de texto
     TEXT = fg.WHITE
-    TITLE = fg.RED
+    TITLE = fg.GREEN
 
     # cores da ferramenta
-    ONE = fg.RED
+    ONE = fg.GREEN
     TWO = fg.WHITE

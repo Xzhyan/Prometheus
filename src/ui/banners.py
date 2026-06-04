@@ -5,7 +5,8 @@ from core.constants import Colors
 
 
 class Banner:
-    TOOL_LOGO = f"""{Colors.ONE}
+    TOOL_LOGO = f"""{Colors.TEXT}
+                    Brazilian Cyber Defense - The Military Boys{Colors.ONE}
                           ┏━┓┏━┓┏━┓┏┳┓┏━╸╺┳╸╻ ╻┏━╸╻ ╻┏━┓
                           ┣━┛┣┳┛┃ ┃┃┃┃┣╸  ┃ ┣━┫┣╸ ┃ ┃┗━┓
                           ╹  ╹┗╸┗━┛╹ ╹┗━╸ ╹ ╹ ╹┗━╸┗━┛┗━┛

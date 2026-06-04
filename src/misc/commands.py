@@ -2,6 +2,10 @@
 from utils.system import shutdown, clear, run_module
 
 
+def ids():
+    run_module('src/misc/defense', 'ids.py')
+
+
 def port_scan():
     run_module('src/misc/cybersec', 'portscan.py')
 
@@ -23,5 +27,9 @@ CYBERSEC_COMMANDS = {
         'desc': "Escaner de portas",
         'handler': port_scan
     },
+    'ids': {
+        'desc': "Sistema de detecção de intrusão",
+        'handler': ids
+    }
 }
 

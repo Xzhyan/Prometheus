@@ -15,7 +15,7 @@ from misc.commands import DEFAULT_COMMANDS, CYBERSEC_COMMANDS, shutdown, clear
 
 
 
-class Main:
+class Prometheus:
     def __init__(self):
         self.running = True
     
@@ -58,8 +58,8 @@ class Main:
 
 if __name__ == '__main__':
     try:
-        tool = Main()
-        tool.startup()
+        main = Prometheus()
+        main.startup()
 
     except KeyboardInterrupt:
         alert('info', "Finalizando...")
