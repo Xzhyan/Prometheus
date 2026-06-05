@@ -1,4 +1,3 @@
-
 # core
 from core.config import settings
 from core.constants import Colors
