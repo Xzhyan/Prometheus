@@ -3,7 +3,7 @@ from utils.system import shutdown, clear, run_module
 
 
 def ids():
-    run_module('src/misc/defense', 'ids.py')
+    run_module('defense/ids', 'main.py')
 
 
 def port_scan():

@@ -1,9 +1,14 @@
-from pydantic_settings import BaseSettings
+from pydantic_settings import BaseSettings, SettingsConfigDict
+from core.constants import BASE_DIR
 
 
 class Settings(BaseSettings):
     TOOL_NAME: str
     AUTHOR: str
 
-    class Config:
-        env_file = '.env'
+    model_config = SettingsConfigDict(
+        env_file=BASE_DIR / '.env'
+    )
+
+
+settings = Settings()
