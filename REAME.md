@@ -1,59 +1,14 @@
 # Prometheus
 
-> Ferramenta de automação e multiplas funcionalidades além de futuramente ter ferramentas para cybersegurança.
+> Ferramenta com interface CLI com features diversas para auxiliar o usuário, implementar o sistema, futuramente trabalhar com privacidade e funções auxiliares para cibersegurança. Desenvolvida específicamente para OS Windows.
 
-## Developed by Xzhan DEV.
+## ! ATENÇÃO !
 
-## Comandos da ferramenta
+> A FERRAMENTA FOI DESENVOLVIDA PARA AUXILIAR O USUÁRIO, OU SEJA, O MAL USO DESSA FERRAMENTA É DE TOTAL RESPONSABILIDADE **SUA/VOCÊ** QUEM QUER QUE FAÇA USO DELA!!!
 
-### Default
-- clear
-- exit
+## Súmario
 
-### System
-- clear temp files
-
-
-### Downloaders
-- youtube downloader
-- instagram downloader
-- pinterest downloader
-
-
-### System/Network Defense
-- IDS
-- IPS
-- Firewall
-
-
-### Cybersec
-- port scan
-- ip scan
-
-
-### Diversos
-- wallpapers
-- games
-
-
----
-
-# .env
-
-```
-
-# -------------------------#
-# CONFIGURAÇÕES PROMETHEUS #
-# -------------------------#
-
-# Informações baiscas
-TOOL_NAME=Prometheus
-AUTHOR=Xzhyan
-VERSION=BETA
-LANG=pt_BR
-DESC=Ferramenta de automação e multiplas funções ainda com opções voltadas a cybersegurança.
-
-```
-
----
+- Informações
+- Comandos
+- Instalação
 
