@@ -11,7 +11,7 @@ from ui.ui_console import alert
 from utils.system import entry, list_commands
 
 # commands
-from misc.commands import DEFAULT_COMMANDS, CYBERSEC_COMMANDS, shutdown, clear
+from misc.commands import DEFAULT_COMMANDS, SPECIAL_COMMANDS, CYBERSEC_COMMANDS, shutdown, clear
 
 
 
@@ -33,10 +33,14 @@ class Prometheus:
                 if command == 'help':
                     print(Banner.HELP_MENU)
                     list_commands(DEFAULT_COMMANDS)
+                    list_commands(SPECIAL_COMMANDS)
                     list_commands(CYBERSEC_COMMANDS)
 
                 elif command in DEFAULT_COMMANDS:
                     DEFAULT_COMMANDS[command]['handler']()
+
+                elif command in SPECIAL_COMMANDS:
+                    SPECIAL_COMMANDS[command]['handler']()
 
                 elif command in CYBERSEC_COMMANDS:
                     CYBERSEC_COMMANDS[command]['handler']()

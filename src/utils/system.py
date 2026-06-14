@@ -63,6 +63,25 @@ def run_module(path, name):
     except Exception as e:
         add_log('error', str(e))
 
+def run_module_with_command(path, *args):
+    try:
+        path = Path(path)
+        path_check(path)
+        python_venv = path / '.venv' / 'Scripts' / 'python.exe'
+        
+        subprocess.Popen(
+            [str(python_venv), *args],
+            cwd=path,
+            creationflags=subprocess.CREATE_NEW_CONSOLE
+        )
+
+    except FilePathNotFoundError as e:
+        add_log('error', str(e))
+        alert('error', str(e))
+
+    except Exception as e:
+        add_log('error', str(e))
+
 
 # modelo para run module admin e verificador
 # def run_module_admin(module):

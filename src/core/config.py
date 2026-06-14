@@ -1,14 +1,22 @@
 from pydantic_settings import BaseSettings, SettingsConfigDict
+from pathlib import Path
 
 
 class Settings(BaseSettings):
     """Configurações base da ferramenta"""
 
+    # Configuração da ferramenta
     TOOL_NAME: str
     AUTHOR: str
     VERSION: str
     LANG: str
     DESC: str
+
+
+    # EasySharing
+    EASY_PATH: Path
+    EASY_SERVER_IP: str
+
 
     model_config = SettingsConfigDict(
         env_file='.env'
