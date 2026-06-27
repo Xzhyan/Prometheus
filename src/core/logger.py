@@ -33,7 +33,7 @@ def setup_logger(name, file_name):
     return logger
 
 
-def add_log(name, message):
+def addlog(name, message):
     """Usado para adicionar logs"""
 
     new_log = setup_logger(name, f'{name}.log')

@@ -1,4 +1,4 @@
-import subprocess, platform, sys
+import subprocess, platform, sys, json
 from pathlib import Path
 
 # core, exceptions, dependencies, logger
@@ -6,7 +6,7 @@ from core import settings
 from core.constants import Colors, USERNAME, BASE_DIR
 from core.exceptions import InvalidCommandError, PathNotFoundError, FilePathNotFoundError
 from core.dependencies import file_check, path_check
-from core.logger import add_log
+from core.logger import addlog
 
 # ui
 from ui.ui_console import alert
@@ -19,6 +19,13 @@ def shutdown():
     sys.exit(0)
 
 
+def restart():
+    """Reinicia a ferramenta"""
+
+    run_module('src', 'main.py')
+    shutdown()
+
+
 def clear():
     """Limpa a tela da ferramenta"""
 
@@ -26,11 +33,18 @@ def clear():
     subprocess.run(cmd, shell=True)
 
 
+def set_title(title):
+    """Seta um titulo pra janela da ferramenta"""
+
+    if platform.system() == 'Windows':
+        subprocess.run(f'title {title}', shell=True)
+
+
 def entry():
     """Recebe a entrada do usuário e retorna em argumentos"""
 
-    print(f"\n {Colors.ONE}┌─({Colors.TEXT}{settings.TOOL_NAME}{Colors.ONE})-[{Colors.TEXT}{USERNAME}{Colors.ONE}]")
-    entry = input(f" {Colors.TITLE}└⇘⇘⇘ {Colors.TEXT}")
+    print(f"\n {Colors.ONE}┌┄({Colors.TEXT}{settings.TOOL_NAME}{Colors.ONE})-[{Colors.TEXT}{USERNAME}{Colors.ONE}]")
+    entry = input(f" {Colors.TITLE}└┄┄┄⎶›{Colors.TEXT} ")
     
     if not entry:
         raise InvalidCommandError()
@@ -38,11 +52,12 @@ def entry():
     return entry.split()
 
 
-def list_commands(category):
+def list_commands(name, category):
     """Faz a lsitagem dos comandos"""
 
+    print(f"\n{Colors.ONE}┄┄┄┄┄┄┄┄┄┄ {Colors.TEXT}{name} {Colors.ONE}┄┄┄┄┄┄┄┄┄┄")
     for cmd, data in category.items():
-        print(f"    {Colors.TITLE}{cmd} {Colors.TEXT}-> {data['desc']}")
+        print(f" {Colors.TITLE}{cmd} {Colors.TEXT}-> {data['desc']}")
 
 
 def run_module(path, name):
@@ -57,13 +72,14 @@ def run_module(path, name):
         )
 
     except FilePathNotFoundError as e:
-        add_log('error', str(e))
+        addlog('error', str(e))
         alert('error', str(e))
 
     except Exception as e:
-        add_log('error', str(e))
+        addlog('error', str(e))
 
-def run_module_with_command(path, *args):
+
+def run_python_module(path, *args):
     try:
         path = Path(path)
         path_check(path)
@@ -76,28 +92,30 @@ def run_module_with_command(path, *args):
         )
 
     except FilePathNotFoundError as e:
-        add_log('error', str(e))
+        addlog('error', str(e))
         alert('error', str(e))
 
     except Exception as e:
-        add_log('error', str(e))
+        addlog('error', str(e))
 
 
-# modelo para run module admin e verificador
-# def run_module_admin(module):
-#     ctypes.windll.shell32.ShellExecuteW(
-#         None,
-#         "runas",
-#         sys.executable,
-#         str(module),
-#         None,
-#         1
-#     )
+def read_json(json_file):
+    """Função para ler arquivo json"""
 
-# import ctypes
+    try:
+        with open(BASE_DIR / 'json' / json_file, 'r', encoding='utf-8') as f:
+            return json.load(f)
 
-# def is_admin():
-#     try:
-#         return ctypes.windll.shell32.IsUserAnAdmin()
-#     except:
-#         return False
+    except Exception as e:
+        print(str(e))
+
+
+def write_json(json_file, data):
+    """Escreve no arquivo json"""
+
+    try:
+        with open(BASE_DIR / 'json' / json_file, 'w', encoding='utf-8') as f:
+            json.dump(data, f, ensure_ascii=False, indent=4)
+        
+    except Exception as e:
+        print(str(e))

@@ -1,18 +1,23 @@
 # core
 from core import settings
 from core.exceptions import InvalidCommandError, CommandNotFoundError
-from core.logger import add_log
+from core.logger import addlog
 
 # ui
-from ui.banners import Banner
+from ui.banners import Banners
 from ui.ui_console import alert
 
 # utils
 from utils.system import entry, list_commands
 
 # commands
-from misc.commands import DEFAULT_COMMANDS, SPECIAL_COMMANDS, CYBERSEC_COMMANDS, shutdown, clear
-
+from cmd.commands import (
+    DEFAULT_COMMANDS,
+    SPECIAL_COMMANDS,
+    shutdown,
+    set_title,
+    clear
+)
 
 
 class Prometheus:
@@ -21,7 +26,8 @@ class Prometheus:
     
     def startup(self):
         clear()
-        print(Banner.TOOL_LOGO)
+        set_title("Prometheus")
+        print(Banners.TOOL_LOGO)
         self.dispatch()
     
     def dispatch(self):
@@ -31,10 +37,10 @@ class Prometheus:
                 command = args[0]
 
                 if command == 'help':
-                    print(Banner.HELP_MENU)
-                    list_commands(DEFAULT_COMMANDS)
-                    list_commands(SPECIAL_COMMANDS)
-                    list_commands(CYBERSEC_COMMANDS)
+                    clear()
+                    print(Banners.HELP_MENU)
+                    list_commands('Comandos normais', DEFAULT_COMMANDS)
+                    list_commands('Comandos especiais', SPECIAL_COMMANDS)
 
                 elif command in DEFAULT_COMMANDS:
                     DEFAULT_COMMANDS[command]['handler']()
@@ -42,22 +48,19 @@ class Prometheus:
                 elif command in SPECIAL_COMMANDS:
                     SPECIAL_COMMANDS[command]['handler']()
 
-                elif command in CYBERSEC_COMMANDS:
-                    CYBERSEC_COMMANDS[command]['handler']()
-
                 else:
                     raise CommandNotFoundError()
 
             except InvalidCommandError as e:
-                add_log('error', f"INVALID_COMMAND | {e}")
+                addlog('error', f"INVALID_COMMAND | {e}")
                 alert('error', str(e))
 
             except CommandNotFoundError as e:
-                add_log('error', f"COMMAND_NOT_FOUND | {e}")
+                addlog('error', f"COMMAND_NOT_FOUND | {e}")
                 alert('error', str(e))
             
             except Exception as e:
-                add_log('error', f"{type(e).__name__} | {e}")
+                addlog('error', f"{type(e).__name__} | {e}")
 
 
 if __name__ == '__main__':
