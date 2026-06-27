@@ -14,3 +14,11 @@ def alert(type_, message):
     color = colors.get(type_, Colors.TEXT)
 
     print(f'{color}[{type_.upper()}] {Colors.TEXT}- {message}')
+
+
+def list_commands(name, category):
+    """Faz a lsitagem dos comandos"""
+
+    print(f"\n{Colors.TEXT}[+] {Colors.ONE}{name}")
+    for cmd, data in category.items():
+        print(f" {Colors.TEXT}↪ {Colors.TITLE}{cmd} {Colors.TEXT}-> {data['desc']}")

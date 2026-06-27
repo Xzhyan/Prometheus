@@ -5,10 +5,10 @@ from core.logger import addlog
 
 # ui
 from ui.banners import Banners
-from ui.ui_console import alert
+from ui.ui_console import alert, list_commands
 
 # utils
-from utils.system import entry, list_commands
+from utils.system import entry
 
 # commands
 from cmd.commands import (

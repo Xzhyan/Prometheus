@@ -1,5 +1,10 @@
-# core/config
+# core
 from core import settings
+from core.constants import Colors
+
+# ui
+from ui.ui_console import alert
+
 
 # utils/system
 from utils.system import (
@@ -45,14 +50,14 @@ class CustomShort:
         name, path = self.entry()
 
         if not name or not path:
-            print("Você deixou campos vazios")
+            alert('error', "Você deixou um campo vazio")
             return
 
         data = read_json('shorts.json')
 
         for short in data['shorts']:
             if short['name'] == name:
-                print("Já existe um atalho com o mesmo nome")
+                alert('info', "Já existe um atalho com o mesmo nome")
                 return
 
         data['shorts'].append({
@@ -62,11 +67,17 @@ class CustomShort:
 
         write_json('shorts.json', data)
 
-        print("Atalho adicionado")
+        alert('success', "Atalho adicionado")
         self.running = False
 
     def remove_short(self):
         pass
+
+    def list_short(self):
+        data = read_json('shorts.json')
+
+        for short in data['shorts']:
+            print(short['name'])
 
     def update_short(self):
         pass
@@ -74,7 +85,7 @@ class CustomShort:
     def manage_short(self):
         while self.running:
             try:
-                cmd = input(" opções: add / remove / update > ")
+                cmd = input(f" {Colors.TEXT}opções: [ {Colors.TITLE}add {Colors.TEXT}| {Colors.TITLE}remove {Colors.TEXT}| {Colors.TITLE}list {Colors.TEXT}| {Colors.TITLE}update {Colors.TEXT}] > ")
 
                 if cmd in self.commands:
                     self.commands[cmd]()
@@ -83,7 +94,7 @@ class CustomShort:
                     self.running = False
 
             except Exception as e:
-                print(str(e))
+                alert('error', str(e))
 
 
 def open_vscode():

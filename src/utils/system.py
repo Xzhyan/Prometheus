@@ -52,14 +52,6 @@ def entry():
     return entry.split()
 
 
-def list_commands(name, category):
-    """Faz a lsitagem dos comandos"""
-
-    print(f"\n{Colors.ONE}┄┄┄┄┄┄┄┄┄┄ {Colors.TEXT}{name} {Colors.ONE}┄┄┄┄┄┄┄┄┄┄")
-    for cmd, data in category.items():
-        print(f" {Colors.TITLE}{cmd} {Colors.TEXT}-> {data['desc']}")
-
-
 def run_module(path, name):
     module = BASE_DIR / path / name
 
