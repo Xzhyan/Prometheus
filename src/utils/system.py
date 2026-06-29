@@ -12,21 +12,21 @@ from core.logger import addlog
 from ui.ui_console import alert
 
 
-def shutdown():
+def shutdown(*args):
     """Finalizar a ferramenta"""
 
     alert('info', "Finalizando...")
     sys.exit(0)
 
 
-def restart():
+def restart(*args):
     """Reinicia a ferramenta"""
 
     run_module('src', 'main.py')
     shutdown()
 
 
-def clear():
+def clear(*args):
     """Limpa a tela da ferramenta"""
 
     cmd = 'cls' if platform.system() == 'Windows' else 'clear'
@@ -95,10 +95,18 @@ def read_json(json_file):
     """Função para ler arquivo json"""
 
     try:
+        json_path = BASE_DIR / 'json' / json_file
+        file_check(json_path)
+
         with open(BASE_DIR / 'json' / json_file, 'r', encoding='utf-8') as f:
             return json.load(f)
 
+    except FilePathNotFoundError:
+        addlog('error', str(e))
+        alert('error', str(e))
+
     except Exception as e:
+        addlog('error', str(e))
         print(str(e))
 
 
@@ -106,8 +114,16 @@ def write_json(json_file, data):
     """Escreve no arquivo json"""
 
     try:
-        with open(BASE_DIR / 'json' / json_file, 'w', encoding='utf-8') as f:
+        json_path = BASE_DIR / 'json' / json_file
+        file_check(json_path)
+
+        with open(json_path, 'w', encoding='utf-8') as f:
             json.dump(data, f, ensure_ascii=False, indent=4)
+
+    except FilePathNotFoundError:
+        addlog('error', str(e))
+        alert('error', str(e))
         
     except Exception as e:
-        print(str(e))
+        addlog('error', str(e))
+        alert('error', str(e))

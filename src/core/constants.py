@@ -23,9 +23,9 @@ class Colors:
     WARNING = fg.YELLOW
 
     # cores de texto
-    TEXT = fg.WHITE
-    TITLE = fg.BLUE # GREEN
+    TEXT = fg.LIGHTWHITE_EX
+    TITLE = fg.LIGHTGREEN_EX
 
     # cores da ferramenta
-    ONE = fg.BLUE # GREEN
-    TWO = fg.WHITE
+    ONE = fg.LIGHTGREEN_EX
+    TWO = fg.LIGHTWHITE_EX

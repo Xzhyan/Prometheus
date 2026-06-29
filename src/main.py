@@ -43,10 +43,10 @@ class Prometheus:
                     list_commands('Comandos especiais', SPECIAL_COMMANDS)
 
                 elif command in DEFAULT_COMMANDS:
-                    DEFAULT_COMMANDS[command]['handler']()
+                    DEFAULT_COMMANDS[command]['handler'](args)
 
                 elif command in SPECIAL_COMMANDS:
-                    SPECIAL_COMMANDS[command]['handler']()
+                    SPECIAL_COMMANDS[command]['handler'](args)
 
                 else:
                     raise CommandNotFoundError()

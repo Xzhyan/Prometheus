@@ -1,5 +1,6 @@
 # core
 from core import settings
+from core.logger import addlog
 from core.constants import Colors
 
 # ui
@@ -29,12 +30,13 @@ def easy_sharing():
 
 
 class CustomShort:
-    def __init__(self):
+    def __init__(self, *args):
         self.running = True
 
         self.commands = {
             'add': self.add_short,
             'remove': self.remove_short,
+            'list': self.list_short,
             'update': self.update_short
         }
 
@@ -76,8 +78,9 @@ class CustomShort:
     def list_short(self):
         data = read_json('shorts.json')
 
+        print(f"\n{Colors.TITLE}[+] {Colors.TEXT}Lista de atalhos {Colors.TITLE}")
         for short in data['shorts']:
-            print(short['name'])
+            print(f" {Colors.TEXT}↪ {Colors.TITLE}{short['name']}")
 
     def update_short(self):
         pass
@@ -85,7 +88,7 @@ class CustomShort:
     def manage_short(self):
         while self.running:
             try:
-                cmd = input(f" {Colors.TEXT}opções: [ {Colors.TITLE}add {Colors.TEXT}| {Colors.TITLE}remove {Colors.TEXT}| {Colors.TITLE}list {Colors.TEXT}| {Colors.TITLE}update {Colors.TEXT}] > ")
+                cmd = input(f" \n{Colors.TEXT}opções: [ {Colors.TITLE}add {Colors.TEXT}| {Colors.TITLE}remove {Colors.TEXT}| {Colors.TITLE}list {Colors.TEXT}| {Colors.TITLE}update {Colors.TEXT}] > ")
 
                 if cmd in self.commands:
                     self.commands[cmd]()
@@ -94,6 +97,7 @@ class CustomShort:
                     self.running = False
 
             except Exception as e:
+                addlog('error', str(e))
                 alert('error', str(e))
 
 
@@ -101,25 +105,35 @@ def open_vscode():
     pass
 
 
+def open_short(short):
+    """Emula o comando cd para abrir atalhos adicionados"""
+
+    pass
+
+
 DEFAULT_COMMANDS = {
     'exit': {
-        'desc': "Finalizar a ferramenta",
+        'desc': "finalizar a ferramenta",
         'handler': shutdown
     },
     'restart': {
-        'desc': "Finaliza o processo atual e inicia um novo",
+        'desc': "finaliza o processo atual e inicia um novo",
         'handler': restart
     },
     'clear': {
-        'desc': "Limpar a tela",
+        'desc': "limpar a tela",
         'handler': clear
     },
-    'short': {
-        'desc': "Gerenciar os atalhos",
+    'shorts': {
+        'desc': "gerenciar os atalhos",
         'handler': CustomShort
     },
+    'cd': {
+        'desc': "acessa o caminho do atalho ex: cd meu_atalho",
+        'handler': lambda short: open_short(short)
+    },
     'code': {
-        'desc': "Abre o VS Code na pasta do atalho",
+        'desc': "abre o VS Code na pasta do atalho",
         'handler': open_vscode
     }
 }
@@ -127,7 +141,7 @@ DEFAULT_COMMANDS = {
 
 SPECIAL_COMMANDS = {
     'easy': {
-        'desc': "Inicia o EasySharing (ftp/drive local)",
+        'desc': "inicia o EasySharing (ftp/drive local)",
         'handler': easy_sharing
     }
 }
