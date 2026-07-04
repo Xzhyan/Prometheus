@@ -222,3 +222,7 @@ __marimo__/
 # Streamlit
 .streamlit/secrets.toml
 
+# Outras pastas do projeto
+logs/
+bin/ffmpeg
+bin/output

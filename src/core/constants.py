@@ -12,6 +12,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 # Caminho dos logs
 LOG_DIR = BASE_DIR / 'logs'
 
+# Caminho FFMPEG
+FFMPEG_DIR = BASE_DIR / 'bin' / 'ffmpeg'
+
+# Caminho para saidas
+OUTPUT_DIR = BASE_DIR / 'bin' / 'output'
+
 
 class Colors:
     """Esquema de cores"""
