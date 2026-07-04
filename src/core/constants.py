@@ -24,8 +24,8 @@ class Colors:
 
     # cores de texto
     TEXT = fg.LIGHTWHITE_EX
-    TITLE = fg.LIGHTGREEN_EX
+    TITLE = fg.GREEN
 
     # cores da ferramenta
-    ONE = fg.LIGHTGREEN_EX
+    ONE = fg.GREEN
     TWO = fg.LIGHTWHITE_EX

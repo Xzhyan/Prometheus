@@ -1,11 +1,14 @@
+import subprocess
+
 # core
 from core import settings
 from core.logger import addlog
 from core.constants import Colors
+from core.dependencies import path_check
+from core.exceptions import PathNotFoundError
 
 # ui
 from ui.ui_console import alert
-
 
 # utils/system
 from utils.system import (
@@ -105,10 +108,23 @@ def open_vscode():
     pass
 
 
-def open_short(short):
+def open_short(short_name):
     """Emula o comando cd para abrir atalhos adicionados"""
 
-    pass
+    data = read_json('shorts.json')
+
+    if not short_name in data['shorts']:
+        alert('error', "O atalho não existe")
+
+    try:
+        path = short_name['path']
+        path_check(path)
+
+        subprocess.run(f'cd {path}', shell=True)
+
+    except PathNotFoundError as e:
+        addlog('error', str(e))
+        alert('error', str(e))
 
 
 DEFAULT_COMMANDS = {
@@ -130,7 +146,7 @@ DEFAULT_COMMANDS = {
     },
     'cd': {
         'desc': "acessa o caminho do atalho ex: cd meu_atalho",
-        'handler': lambda short: open_short(short)
+        'handler': lambda short_name: open_short(short_name)
     },
     'code': {
         'desc': "abre o VS Code na pasta do atalho",
