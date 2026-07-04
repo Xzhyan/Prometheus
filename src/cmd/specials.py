@@ -19,15 +19,15 @@ def easy_sharing(*args):
 
 class YoutubeDownloader:
     def __init__(self, args):
-        op_type = args[1]
-        url_link = args[2]
+        cmd = args[1]
+        url = args[2]
 
-        if not op_type or not url_link:
+        if not cmd or not url:
             raise ValueError("faltou argumento")
         
-        self.dispatch(op_type, url_link)
+        self.dispatch(cmd, url)
 
-    def download_music(self, url_link):
+    def download_music(self, url):
         ydl_opts = {
             'format': 'bestaudio/best',
             'ffmpeg_location': FFMPEG_DIR,
@@ -41,16 +41,16 @@ class YoutubeDownloader:
 
         try:
             with yt_dlp.YoutubeDL(ydl_opts) as ydl:
-                ydl.download([url_link])
+                ydl.download([url])
 
         except Exception as e:
             print(e)
 
 
-    def dispatch(self, op_type, url_link):
-        if op_type == 'music':
+    def dispatch(self, cmd, url):
+        if cmd == 'music':
             try:
-                self.download_music(url_link)
+                self.download_music(url)
             
             except Exception as e:
                 print(e)
