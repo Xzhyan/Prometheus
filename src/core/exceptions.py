@@ -21,3 +21,7 @@ class FilePathNotFoundError(Exception):
 
 class PathNotFoundError(Exception):
     pass
+
+
+class ShortNotFoundError(Exception):
+    pass

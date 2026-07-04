@@ -1,6 +1,6 @@
 # core
 from core import settings
-from core.exceptions import InvalidCommandError, CommandNotFoundError
+from core.exceptions import InvalidCommandError, CommandNotFoundError, ShortNotFoundError
 from core.logger import addlog
 
 # ui
@@ -8,16 +8,13 @@ from ui.banners import Banners
 from ui.ui_console import alert, list_commands
 
 # utils
-from utils.system import entry
+from utils.system import entry, set_title, shutdown, clear
 
 # commands
-from cmd.commands import (
-    DEFAULT_COMMANDS,
-    SPECIAL_COMMANDS,
-    shutdown,
-    set_title,
-    clear
-)
+from cmd.commands import DEFAULT_COMMANDS
+
+# special commands
+from cmd.specials import SPECIAL_COMMANDS
 
 
 class Prometheus:
@@ -58,9 +55,14 @@ class Prometheus:
             except CommandNotFoundError as e:
                 addlog('error', f"COMMAND_NOT_FOUND | {e}")
                 alert('error', str(e))
+
+            except ShortNotFoundError as e:
+                addlog('error', f"SHORT_NOT_FOUND | {e}")
+                alert('error', str(e))
             
             except Exception as e:
                 addlog('error', f"{type(e).__name__} | {e}")
+                alert('error', str(e))
 
 
 if __name__ == '__main__':

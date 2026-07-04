@@ -5,7 +5,7 @@ from core import settings
 from core.logger import addlog
 from core.constants import Colors
 from core.dependencies import path_check
-from core.exceptions import PathNotFoundError
+from core.exceptions import PathNotFoundError, ShortNotFoundError
 
 # ui
 from ui.ui_console import alert
@@ -14,22 +14,11 @@ from ui.ui_console import alert
 from utils.system import (
     shutdown,
     restart,
-    set_title,
     clear,
-    run_module,
     run_python_module,
     read_json,
     write_json
 )
-
-
-def easy_sharing():
-    run_python_module(
-        settings.EASY_PATH,
-        'manage.py',
-        'runserver',
-        settings.EASY_SERVER_IP
-    )
 
 
 class CustomShort:
@@ -104,23 +93,26 @@ class CustomShort:
                 alert('error', str(e))
 
 
-def open_vscode():
-    pass
-
-
-def open_short(short_name):
+def open_short(args):
     """Emula o comando cd para abrir atalhos adicionados"""
 
-    data = read_json('shorts.json')
+    cmd = 'code' if args[0] == 'code' else 'start'
 
-    if not short_name in data['shorts']:
-        alert('error', "O atalho não existe")
+    short_name = args[1]
+    data = read_json('shorts.json')
+    path = None
+
+    for short in data['shorts']:
+        if short['name'] == short_name:
+            path = short['path']
+            break
+
+    if path is None:
+        raise ShortNotFoundError("O atalho não existe")
 
     try:
-        path = short_name['path']
         path_check(path)
-
-        subprocess.run(f'cd {path}', shell=True)
+        subprocess.run(f'{cmd} "" "{path}"', shell=True)
 
     except PathNotFoundError as e:
         addlog('error', str(e))
@@ -144,20 +136,12 @@ DEFAULT_COMMANDS = {
         'desc': "gerenciar os atalhos",
         'handler': CustomShort
     },
-    'cd': {
-        'desc': "acessa o caminho do atalho ex: cd meu_atalho",
-        'handler': lambda short_name: open_short(short_name)
+    'open': {
+        'desc': "abre o Explorer na pasta do atalho",
+        'handler': lambda args: open_short(args)
     },
     'code': {
         'desc': "abre o VS Code na pasta do atalho",
-        'handler': open_vscode
-    }
-}
-
-
-SPECIAL_COMMANDS = {
-    'easy': {
-        'desc': "inicia o EasySharing (ftp/drive local)",
-        'handler': easy_sharing
+        'handler': lambda args: open_short(args)
     }
 }
