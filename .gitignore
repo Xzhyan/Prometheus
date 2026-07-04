@@ -224,5 +224,5 @@ __marimo__/
 
 # Outras pastas do projeto
 logs/
-bin/ffmpeg
-bin/output
+bin/ffmpeg/
+bin/output/
