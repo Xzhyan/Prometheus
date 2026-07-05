@@ -60,6 +60,10 @@ class Prometheus:
                 addlog('error', f"SHORT_NOT_FOUND | {e}")
                 alert('error', str(e))
             
+            except IndexError:
+                addlog('error', f"INDEX_ERROR | cmd={command} | argumentos faltando")
+                alert('error', f"Faltam argumentos. Use help e leia o modo de uso do comando.")
+
             except Exception as e:
                 addlog('error', f"{type(e).__name__} | {e}")
                 alert('error', str(e))

@@ -7,6 +7,10 @@
         {
             "name": "cascos_server",
             "path": "C:\\Xzhyan\\Workspace\\codes\\Controle_de_Cascos_Servidor"
+        },
+        {
+            "name": "prometheus",
+            "path": "C:\\Xzhyan\\Workspace\\codes\\Prometheus"
         }
     ]
 }

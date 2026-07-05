@@ -25,3 +25,8 @@ class PathNotFoundError(Exception):
 
 class ShortNotFoundError(Exception):
     pass
+
+
+class ArgumentError(Exception):
+    pass
+
