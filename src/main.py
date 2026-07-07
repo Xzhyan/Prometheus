@@ -1,5 +1,6 @@
 # core
 from core import settings
+from core.dependencies import check_all
 from core.exceptions import InvalidCommandError, CommandNotFoundError, ShortNotFoundError
 from core.logger import addlog
 
@@ -19,7 +20,7 @@ from cmd.specials import SPECIAL_COMMANDS
 
 class Prometheus:
     def __init__(self):
-        self.running = True
+        self.running = check_all()
     
     def startup(self):
         clear()

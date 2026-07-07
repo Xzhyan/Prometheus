@@ -3,8 +3,13 @@ from colorama import Fore as fg
 import os, getpass
 
 
+# -------- USUÁRIO E SISTEMA -------- #
+
 # Nome de usuário da máquina
 USERNAME = getpass.getuser()
+
+
+# -------- CAMINHOS -------- #
 
 # Caminho absoluto da ferramenta, 'fora do src'
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
@@ -12,12 +17,17 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 # Caminho dos logs
 LOG_DIR = BASE_DIR / 'logs'
 
+# Caminho dos .jsom
+JSON_DIR = BASE_DIR / 'json' 
+
 # Caminho FFMPEG
 FFMPEG_DIR = BASE_DIR / 'bin' / 'ffmpeg'
 
 # Caminho para saidas
 OUTPUT_DIR = BASE_DIR / 'bin' / 'output'
 
+
+# -------- CORES -------- #
 
 class Colors:
     """Esquema de cores"""
