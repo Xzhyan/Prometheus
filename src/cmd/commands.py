@@ -87,6 +87,11 @@ class CustomShort:
 
                 else:
                     self.running = False
+            
+            except KeyboardInterrupt:
+                print()
+                alert('info', "Finalizando shorts...")
+                self.running = False
 
             except Exception as e:
                 addlog('error', str(e))
