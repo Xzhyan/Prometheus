@@ -3,7 +3,7 @@ from pathlib import Path
 
 # core, exceptions, dependencies, logger
 from core import settings
-from core.constants import Colors, USERNAME, BASE_DIR
+from core.constants import Colors, USERNAME, BASE_DIR, JSON_DIR
 from core.exceptions import InvalidCommandError, PathNotFoundError, FilePathNotFoundError
 from core.dependencies import file_check, path_check
 from core.logger import addlog
@@ -95,7 +95,7 @@ def read_json(json_file):
     """Função para ler arquivo json"""
 
     try:
-        json_path = BASE_DIR / 'json' / json_file
+        json_path = JSON_DIR / json_file
         file_check(json_path)
 
         with open(BASE_DIR / 'json' / json_file, 'r', encoding='utf-8') as f:

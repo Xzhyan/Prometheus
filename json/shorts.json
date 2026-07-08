@@ -1,16 +1,3 @@
 {
-    "shorts": [
-        {
-            "name": "cascos_client",
-            "path": "C:\\Xzhyan\\Workspace\\codes\\Controle_de_Cascos_Cliente"
-        },
-        {
-            "name": "cascos_server",
-            "path": "C:\\Xzhyan\\Workspace\\codes\\Controle_de_Cascos_Servidor"
-        },
-        {
-            "name": "prometheus",
-            "path": "C:\\Xzhyan\\Workspace\\codes\\Prometheus"
-        }
-    ]
+    "shorts": []
 }
