@@ -21,7 +21,7 @@ from cmd.specials import SPECIAL_COMMANDS
 class Prometheus:
     def __init__(self):
         self.running = check_all()
-    
+
     def startup(self):
         clear()
         set_title("Prometheus")

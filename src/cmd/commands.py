@@ -99,7 +99,7 @@ class CustomShort:
 
 
 def open_short(args):
-    """Emula o comando cd para abrir atalhos adicionados"""
+    """Abre os atalhos adicionados no explorer ou no vs code"""
 
     cmd = 'code' if args[0] == 'code' else 'start'
 
@@ -122,6 +122,12 @@ def open_short(args):
     except PathNotFoundError as e:
         addlog('error', str(e))
         alert('error', str(e))
+
+
+def browser_start(args):
+    """Abre o navegador configurado por padrão já na página do google.com"""
+
+    subprocess.run('start https://google.com', shell=True)
 
 
 DEFAULT_COMMANDS = {
@@ -148,5 +154,9 @@ DEFAULT_COMMANDS = {
     'code': {
         'desc': "abre o VS Code na pasta do atalho",
         'handler': lambda args: open_short(args)
+    },
+    'browser': {
+        'desc': "abre o nevegador padrão já na página do google.com",
+        'handler': browser_start
     }
 }

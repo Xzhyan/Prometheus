@@ -1,3 +1,8 @@
 {
-    "shorts": []
+    "shorts": [
+        {
+            "name": "prometheus",
+            "path": "C:\\Xzhyan\\Workspace\\codes\\Prometheus"
+        }
+    ]
 }
