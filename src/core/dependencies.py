@@ -42,11 +42,11 @@ def check_all():
         for path in path_list:
             path.mkdir(exist_ok=True)
 
-            time.sleep(0.5)
+            time.sleep(0.1)
             alert('success', f"{path}: ok")
         
         alert('info', "Tudo pronto, aguarde alguns segundos...")
-        time.sleep(3)
+        time.sleep(0.3)
         return True
 
     except Exception as e:

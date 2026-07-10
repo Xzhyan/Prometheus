@@ -17,7 +17,7 @@ def alert(type_, message):
 
 
 def list_commands(name, category):
-    """Faz a lsitagem dos comandos"""
+    """Faz a listagem dos comandos"""
 
     print(f"\n{Colors.TEXT}[+] {Colors.ONE}{name}")
     for cmd, data in category.items():

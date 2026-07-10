@@ -8,7 +8,7 @@ from core.dependencies import path_check
 from core.exceptions import PathNotFoundError, ShortNotFoundError
 
 # ui
-from ui.ui_console import alert
+from ui.ui_console import alert, list_commands
 
 # utils/system
 from utils.system import (
@@ -16,6 +16,10 @@ from utils.system import (
     restart,
     clear,
     run_python_module,
+)
+
+# functions
+from utils.functions import (
     read_json,
     write_json
 )
@@ -26,10 +30,22 @@ class CustomShort:
         self.running = True
 
         self.commands = {
-            'add': self.add_short,
-            'remove': self.remove_short,
-            'list': self.list_short,
-            'update': self.update_short
+            'add': {
+                'desc': "adiciona novo atalho",
+                'handler': self.add_short
+            },
+            'remove': {
+                'desc': "remove um atalho",
+                'handler': self.remove_short
+            },
+            'list': {
+                'desc': "lista os atalhos adicionados",
+                'handler': self.list_short
+            },
+            'update': {
+                'desc': "atualiza um atalho",
+                'handler': self.update_short
+            }
         }
 
         self.manage_short()
@@ -78,12 +94,13 @@ class CustomShort:
         pass
 
     def manage_short(self):
+        list_commands('shorts', self.commands)
         while self.running:
             try:
-                cmd = input(f" \n{Colors.TEXT}opções: [ {Colors.TITLE}add {Colors.TEXT}| {Colors.TITLE}remove {Colors.TEXT}| {Colors.TITLE}list {Colors.TEXT}| {Colors.TITLE}update {Colors.TEXT}] > ")
+                cmd = input(f"\n {Colors.TITLE} @shorts >> {Colors.TEXT}")
 
                 if cmd in self.commands:
-                    self.commands[cmd]()
+                    self.commands[cmd]['handler']()
 
                 else:
                     self.running = False
@@ -124,12 +141,6 @@ def open_short(args):
         alert('error', str(e))
 
 
-def browser_start(args):
-    """Abre o navegador configurado por padrão já na página do google.com"""
-
-    subprocess.run('start https://google.com', shell=True)
-
-
 DEFAULT_COMMANDS = {
     'exit': {
         'desc': "finalizar a ferramenta",
@@ -154,9 +165,5 @@ DEFAULT_COMMANDS = {
     'code': {
         'desc': "abre o VS Code na pasta do atalho",
         'handler': lambda args: open_short(args)
-    },
-    'browser': {
-        'desc': "abre o nevegador padrão já na página do google.com",
-        'handler': browser_start
     }
 }

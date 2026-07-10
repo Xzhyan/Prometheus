@@ -1,10 +1,10 @@
-import subprocess, platform, sys, json
+import subprocess, platform, sys, time
 from pathlib import Path
 
 # core, exceptions, dependencies, logger
 from core import settings
-from core.constants import Colors, USERNAME, BASE_DIR, JSON_DIR
-from core.exceptions import InvalidCommandError, PathNotFoundError, FilePathNotFoundError
+from core.constants import Colors, USERNAME, BASE_DIR
+from core.exceptions import InvalidCommandError, FilePathNotFoundError
 from core.dependencies import file_check, path_check
 from core.logger import addlog
 
@@ -17,14 +17,6 @@ def shutdown(*args):
 
     alert('info', "Finalizando...")
     sys.exit(0)
-
-
-def restart(*args):
-    """Reinicia a ferramenta"""
-
-    run_module('src', 'main.py')
-    shutdown()
-
 
 def clear(*args):
     """Limpa a tela da ferramenta"""
@@ -91,39 +83,9 @@ def run_python_module(path, *args):
         addlog('error', str(e))
 
 
-def read_json(json_file):
-    """Função para ler arquivo json"""
+def restart(*args):
+    """Reinicia a ferramenta"""
 
-    try:
-        json_path = JSON_DIR / json_file
-        file_check(json_path)
-
-        with open(BASE_DIR / 'json' / json_file, 'r', encoding='utf-8') as f:
-            return json.load(f)
-
-    except FilePathNotFoundError:
-        addlog('error', str(e))
-        alert('error', str(e))
-
-    except Exception as e:
-        addlog('error', str(e))
-        print(str(e))
-
-
-def write_json(json_file, data):
-    """Escreve no arquivo json"""
-
-    try:
-        json_path = BASE_DIR / 'json' / json_file
-        file_check(json_path)
-
-        with open(json_path, 'w', encoding='utf-8') as f:
-            json.dump(data, f, ensure_ascii=False, indent=4)
-
-    except FilePathNotFoundError:
-        addlog('error', str(e))
-        alert('error', str(e))
-        
-    except Exception as e:
-        addlog('error', str(e))
-        alert('error', str(e))
+    run_module('src', 'main.py')
+    time.sleep(1)
+    shutdown()
