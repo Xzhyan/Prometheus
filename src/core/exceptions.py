@@ -27,6 +27,10 @@ class ShortNotFoundError(Exception):
     pass
 
 
+class AppNotFoundError(Exception):
+    pass
+
+
 class ArgumentError(Exception):
     pass
 

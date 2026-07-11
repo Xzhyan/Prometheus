@@ -80,15 +80,15 @@ class CustomShort:
         alert('success', "Atalho adicionado")
         self.running = False
 
-    def remove_short(self):
-        pass
-
     def list_short(self):
         data = read_json('shorts.json')
 
         print(f"\n{Colors.TITLE}[+] {Colors.TEXT}Lista de atalhos {Colors.TITLE}")
         for short in data['shorts']:
             print(f" {Colors.TEXT}↪ {Colors.TITLE}{short['name']}")
+
+    def remove_short(self):
+        pass
 
     def update_short(self):
         pass
@@ -97,7 +97,7 @@ class CustomShort:
         list_commands('shorts', self.commands)
         while self.running:
             try:
-                cmd = input(f"\n {Colors.TITLE} @shorts >> {Colors.TEXT}")
+                cmd = input(f"\n {Colors.TEXT} @shorts {Colors.TITLE}>> {Colors.TEXT}")
 
                 if cmd in self.commands:
                     self.commands[cmd]['handler']()
@@ -134,7 +134,7 @@ def open_short(args):
 
     try:
         path_check(path)
-        subprocess.run(f'{cmd} "" "{path}"', shell=True)
+        subprocess.Popen(f'{cmd} "" "{path}"')
 
     except PathNotFoundError as e:
         addlog('error', str(e))

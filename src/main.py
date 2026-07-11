@@ -17,6 +17,9 @@ from cmd.commands import DEFAULT_COMMANDS
 # special commands
 from cmd.specials import SPECIAL_COMMANDS
 
+# programs
+from cmd.programs import PROGRAMS_COMMANDS
+
 
 class Prometheus:
     def __init__(self):
@@ -39,12 +42,16 @@ class Prometheus:
                     print(Banners.HELP_MENU)
                     list_commands('Comandos normais', DEFAULT_COMMANDS)
                     list_commands('Comandos especiais', SPECIAL_COMMANDS)
+                    list_commands('Aplicativos adicionados', PROGRAMS_COMMANDS)
 
                 elif command in DEFAULT_COMMANDS:
                     DEFAULT_COMMANDS[command]['handler'](args)
 
                 elif command in SPECIAL_COMMANDS:
                     SPECIAL_COMMANDS[command]['handler'](args)
+
+                elif command in PROGRAMS_COMMANDS:
+                    PROGRAMS_COMMANDS[command]['handler'](args)
 
                 else:
                     raise CommandNotFoundError()
