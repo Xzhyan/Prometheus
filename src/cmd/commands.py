@@ -29,23 +29,26 @@ class CustomShort:
         self.commands = {
             'add': {
                 'desc': "adiciona um novo atalho",
-                'handler': self.add
+                'handler': self.add_short
             },
             'list': {
                 'desc': "lista os atalhos adicionados",
-                'handler': self.list
+                'handler': self.list_shorts
             }
         }
 
         self.manage()
 
-    def add(self):
-        type_ = input(' tipo app/dir > ')
-        name = input(' nome do atalho > ')
-        path = input(' caminho do atalho > ')
+    def add_short(self):
+        type_ = input(f"  {Colors.TEXT}↪ {Colors.TITLE}tipo: app/dir {Colors.TEXT} > ")
+        name = input(f"  {Colors.TEXT}↪ {Colors.TITLE}nome do atalho {Colors.TEXT} > ")
+        path = input(f"  {Colors.TEXT}↪ {Colors.TITLE}caminho do atalho {Colors.TEXT} > ")
 
         if not type_ or not name or not path:
-            print('campo vazio')
+            response = "todos os campos devem ser preenchidos"
+            addlog('info', f"SHORT_MODULE | {response}")
+            alert('info', response)
+            return
 
         data = read_json(SHORTS_JSON)
 
@@ -55,6 +58,7 @@ class CustomShort:
                     alert('info', "já existe um atalho com esse nome")
                     return
 
+        # verificar opções para evitar problema no type_
         data[type_].append({
             'name': name,
             'path': path
@@ -62,11 +66,13 @@ class CustomShort:
 
         write_json(SHORTS_JSON, data)
 
-        alert('success', "atalho adicionado")
+        response = "novo atalho adicionado"
+        addlog('success', f"SHORT_CREATE | {response}")
+        alert('success', response)
 
         self.running = False
 
-    def list(self):
+    def list_shorts(self):
         data = read_json(SHORTS_JSON)
 
         # lista dos atalhos, para agrupar por categoria
@@ -90,7 +96,7 @@ class CustomShort:
             list_commands('Comandos do modulo de atalhos', self.commands)
 
             try:
-                cmd = input(" \n custom short > ")
+                cmd = input(F" \n {Colors.TITLE}custom short {Colors.TEXT}> ")
 
                 if cmd in self.commands:
                     self.commands[cmd]['handler']()
@@ -113,6 +119,39 @@ class CustomShort:
                 alert('info', response)
 
 
+def open_short(args):
+    """abre o atalho especificado"""
+
+    type_ = args[0] # tipo code/explorer/app
+    short_name = args[1]
+    path = None
+
+    data = read_json(SHORTS_JSON)
+
+    for category, item in data.items():
+        for short in item:
+            if short['name'] == short_name:
+                path = short['path']
+                break
+
+            else:
+                raise ShortNotFoundError("atalho inexistente")
+    
+    cmds = {
+        'code': 'code',
+        'explorer': 'explorer',
+        'open': 'start'
+    }
+
+    cmd = cmds.get(type_, 'start')
+
+    try:
+        subprocess.Popen(f'{cmd} {path}', shell=True)
+    
+    except Exception as e:
+        addlog('error', str(e))
+        alert('error', str(e))
+
 
 DEFAULT_COMMANDS = {
     'exit': {
@@ -130,5 +169,17 @@ DEFAULT_COMMANDS = {
     'short': {
         'desc': "inicia o modulo de atalhos",
         'handler': CustomShort
+    },
+    'code': {
+        'desc': "abre o code na pasta do atalho",
+        'handler': lambda args: open_short(args)
+    },
+    'explorer': {
+        'desc': "abre o explorer na pasta do atalho",
+        'handler': lambda args: open_short(args)
+    },
+    'open': {
+        'desc': "abre o aplicativo se o atalho for um",
+        'handler': lambda args: open_short(args)
     }
 }

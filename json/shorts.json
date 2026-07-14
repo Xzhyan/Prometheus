@@ -1,10 +1,5 @@
 {
-    "app": [
-        {
-            "name": "app",
-            "path": "C:\\App\\test"
-        }
-    ],
+    "app": [],
     "dir": [
         {
             "name": "prometheus",
