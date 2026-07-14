@@ -3,6 +3,10 @@
         {
             "name": "prometheus",
             "path": "C:\\Xzhyan\\Workspace\\codes\\Prometheus"
+        },
+        {
+            "name": "clear",
+            "path": "cls"
         }
     ]
 }

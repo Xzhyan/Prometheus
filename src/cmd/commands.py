@@ -50,24 +50,19 @@ class CustomShort:
 
         self.manage_short()
 
-    def entry(self):
-        name = input(" nome do atalho: ")
-        path = input(" caminho do atalho: ")
-
-        return name, path
-
     def add_short(self):
-        name, path = self.entry()
+        name = input(f"   {Colors.TEXT}↪ {Colors.TITLE}nome do atalho: {Colors.TEXT}")
+        path = input(f"   {Colors.TEXT}↪ {Colors.TITLE}caminho do atalho: {Colors.TEXT}")
 
         if not name or not path:
-            alert('error', "Você deixou um campo vazio")
+            alert('error', "você deixou um campo vazio")
             return
 
         data = read_json('shorts.json')
 
         for short in data['shorts']:
             if short['name'] == name:
-                alert('info', "Já existe um atalho com o mesmo nome")
+                alert('info', "já existe um atalho com o mesmo nome")
                 return
 
         data['shorts'].append({
@@ -77,7 +72,7 @@ class CustomShort:
 
         write_json('shorts.json', data)
 
-        alert('success', "Atalho adicionado")
+        alert('success', "atalho adicionado")
         self.running = False
 
     def list_short(self):
@@ -88,7 +83,24 @@ class CustomShort:
             print(f" {Colors.TEXT}↪ {Colors.TITLE}{short['name']}")
 
     def remove_short(self):
-        pass
+        name = input(f"   {Colors.TEXT}↪ {Colors.TITLE}nome do atalho: {Colors.TEXT}")
+
+        if not name:
+            alert('error', 'o nome do atalho deve ser informado')
+        
+        data = read_json('shorts.json')
+        
+        try:
+            for short in data['shorts']:
+                if short['name'] == name:
+                    data['shorts'].remove(short)
+
+                    addlog('error', "atalho removido com sucesso")
+                    alert('success', "atalho removido com sucesso")
+                    break
+        
+        except Exception as e:
+            alert('error', str)
 
     def update_short(self):
         pass
@@ -134,7 +146,7 @@ def open_short(args):
 
     try:
         path_check(path)
-        subprocess.Popen(f'{cmd} "" "{path}"')
+        subprocess.Popen(f'{cmd} "" "{path}"', shell=True)
 
     except PathNotFoundError as e:
         addlog('error', str(e))
