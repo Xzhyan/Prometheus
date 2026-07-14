@@ -27,6 +27,13 @@ FFMPEG_DIR = BASE_DIR / 'bin' / 'ffmpeg'
 OUTPUT_DIR = BASE_DIR / 'bin' / 'output'
 
 
+# -------- ATALHOS -------- #
+# apenas o nome dos arquivos, não o caminho
+# as funções que tratam json já buscam por padrão o dir 'json'
+
+SHORTS_JSON = 'shorts.json'
+
+
 # -------- CORES -------- #
 
 class Colors:

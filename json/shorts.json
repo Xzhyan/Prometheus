@@ -1,12 +1,14 @@
 {
-    "shorts": [
+    "app": [
+        {
+            "name": "app",
+            "path": "C:\\App\\test"
+        }
+    ],
+    "dir": [
         {
             "name": "prometheus",
             "path": "C:\\Xzhyan\\Workspace\\codes\\Prometheus"
-        },
-        {
-            "name": "clear",
-            "path": "cls"
         }
     ]
 }

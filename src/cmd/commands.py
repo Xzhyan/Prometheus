@@ -3,7 +3,7 @@ import subprocess
 # core
 from core import settings
 from core.logger import addlog
-from core.constants import Colors
+from core.constants import Colors, SHORTS_JSON
 from core.dependencies import path_check
 from core.exceptions import PathNotFoundError, ShortNotFoundError
 
@@ -19,138 +19,99 @@ from utils.system import (
 )
 
 # functions
-from utils.functions import (
-    read_json,
-    write_json
-)
+from utils.functions import read_json, write_json
 
 
 class CustomShort:
-    def __init__(self, *args):
+    def __init__(self, args):
         self.running = True
 
         self.commands = {
             'add': {
-                'desc': "adiciona novo atalho",
-                'handler': self.add_short
-            },
-            'remove': {
-                'desc': "remove um atalho",
-                'handler': self.remove_short
+                'desc': "adiciona um novo atalho",
+                'handler': self.add
             },
             'list': {
                 'desc': "lista os atalhos adicionados",
-                'handler': self.list_short
-            },
-            'update': {
-                'desc': "atualiza um atalho",
-                'handler': self.update_short
+                'handler': self.list
             }
         }
 
-        self.manage_short()
+        self.manage()
 
-    def add_short(self):
-        name = input(f"   {Colors.TEXT}↪ {Colors.TITLE}nome do atalho: {Colors.TEXT}")
-        path = input(f"   {Colors.TEXT}↪ {Colors.TITLE}caminho do atalho: {Colors.TEXT}")
+    def add(self):
+        type_ = input(' tipo app/dir > ')
+        name = input(' nome do atalho > ')
+        path = input(' caminho do atalho > ')
 
-        if not name or not path:
-            alert('error', "você deixou um campo vazio")
-            return
+        if not type_ or not name or not path:
+            print('campo vazio')
 
-        data = read_json('shorts.json')
+        data = read_json(SHORTS_JSON)
 
-        for short in data['shorts']:
-            if short['name'] == name:
-                alert('info', "já existe um atalho com o mesmo nome")
-                return
+        for category, short in data.items():
+            for short_name in short:
+                if short_name['name'] == name:
+                    alert('info', "já existe um atalho com esse nome")
+                    return
 
-        data['shorts'].append({
+        data[type_].append({
             'name': name,
             'path': path
         })
 
-        write_json('shorts.json', data)
+        write_json(SHORTS_JSON, data)
 
         alert('success', "atalho adicionado")
+
         self.running = False
 
-    def list_short(self):
-        data = read_json('shorts.json')
+    def list(self):
+        data = read_json(SHORTS_JSON)
 
-        print(f"\n{Colors.TITLE}[+] {Colors.TEXT}Lista de atalhos {Colors.TITLE}")
-        for short in data['shorts']:
-            print(f" {Colors.TEXT}↪ {Colors.TITLE}{short['name']}")
+        # lista dos atalhos, para agrupar por categoria
+        app = []
+        dir = []
 
-    def remove_short(self):
-        name = input(f"   {Colors.TEXT}↪ {Colors.TITLE}nome do atalho: {Colors.TEXT}")
-
-        if not name:
-            alert('error', 'o nome do atalho deve ser informado')
+        for category, short in data.items():
+            for short_name in short:
+                if category == 'app':
+                    app.append(short_name['name'])
+                else:
+                    dir.append(short_name['name'])
         
-        data = read_json('shorts.json')
-        
-        try:
-            for short in data['shorts']:
-                if short['name'] == name:
-                    data['shorts'].remove(short)
+        print(app)
+        print(dir)
 
-                    addlog('error', "atalho removido com sucesso")
-                    alert('success', "atalho removido com sucesso")
-                    break
-        
-        except Exception as e:
-            alert('error', str)
+        self.running = False
 
-    def update_short(self):
-        pass
-
-    def manage_short(self):
-        list_commands('shorts', self.commands)
+    def manage(self):
         while self.running:
+            list_commands('Comandos do modulo de atalhos', self.commands)
+
             try:
-                cmd = input(f"\n {Colors.TEXT} @shorts {Colors.TITLE}>> {Colors.TEXT}")
+                cmd = input(" \n custom short > ")
 
                 if cmd in self.commands:
                     self.commands[cmd]['handler']()
-
+                
                 else:
                     self.running = False
-            
-            except KeyboardInterrupt:
-                print()
-                alert('info', "Finalizando shorts...")
-                self.running = False
 
             except Exception as e:
-                addlog('error', str(e))
-                alert('error', str(e))
+                response = str(e)
+                
+                addlog('error', f"UNKNOWN_ERROR | {response}")
+                alert('error', response)
+            
+            except KeyboardInterrupt:
+                self.running = False
 
+                response = "modulo de atalhos finalizado..."
 
-def open_short(args):
-    """Abre os atalhos adicionados no explorer ou no vs code"""
+                addlog('info', f"SHORT_MODULE | {response}")
+                alert('info', response)
 
-    cmd = 'code' if args[0] == 'code' else 'start'
-
-    short_name = args[1]
-    data = read_json('shorts.json')
-    path = None
-
-    for short in data['shorts']:
-        if short['name'] == short_name:
-            path = short['path']
-            break
-
-    if path is None:
-        raise ShortNotFoundError("O atalho não existe")
-
-    try:
-        path_check(path)
-        subprocess.Popen(f'{cmd} "" "{path}"', shell=True)
-
-    except PathNotFoundError as e:
-        addlog('error', str(e))
-        alert('error', str(e))
 
 
 DEFAULT_COMMANDS = {
@@ -166,16 +127,8 @@ DEFAULT_COMMANDS = {
         'desc': "limpar a tela",
         'handler': clear
     },
-    'shorts': {
-        'desc': "gerenciar os atalhos",
+    'short': {
+        'desc': "inicia o modulo de atalhos",
         'handler': CustomShort
-    },
-    'open': {
-        'desc': "abre o Explorer na pasta do atalho",
-        'handler': lambda args: open_short(args)
-    },
-    'code': {
-        'desc': "abre o VS Code na pasta do atalho",
-        'handler': lambda args: open_short(args)
     }
 }
