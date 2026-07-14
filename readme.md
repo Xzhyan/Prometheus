@@ -12,3 +12,12 @@
 - Comandos
 - Instalação
 
+## JSON
+> json/shorts.json
+
+```json
+{
+    "app": [],
+    "dir": []
+}
+```
