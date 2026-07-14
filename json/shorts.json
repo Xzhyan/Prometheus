@@ -1,5 +1,10 @@
 {
-    "app": [],
+    "app": [
+        {
+            "name": "brave",
+            "path": "C:\\Program Files\\BraveSoftware\\Brave-Browser\\Application\\brave.exe"
+        }
+    ],
     "dir": [
         {
             "name": "prometheus",

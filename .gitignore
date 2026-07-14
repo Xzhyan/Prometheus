@@ -226,3 +226,4 @@ __marimo__/
 logs/
 bin/ffmpeg/
 bin/output/
+json/
