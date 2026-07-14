@@ -128,25 +128,26 @@ def open_short(args):
 
     data = read_json(SHORTS_JSON)
 
+
     for category, item in data.items():
         for short in item:
             if short['name'] == short_name:
                 path = short['path']
                 break
 
-            else:
-                raise ShortNotFoundError("atalho inexistente")
+    if path == None:
+        raise ShortNotFoundError("atalho inexistente")
     
     cmds = {
         'code': 'code',
-        'explorer': 'explorer',
+        'explorer': 'start',
         'open': 'start'
     }
 
     cmd = cmds.get(type_, 'start')
 
     try:
-        subprocess.Popen(f'{cmd} {path}', shell=True)
+        subprocess.Popen(f'{cmd} "" "{path}"', shell=True)
     
     except Exception as e:
         addlog('error', str(e))
