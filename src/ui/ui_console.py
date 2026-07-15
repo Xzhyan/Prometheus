@@ -1,7 +1,7 @@
 from core.constants import Colors
 
 
-def alert(type_, message):
+def alert(type_, message, br=True):
     """Exibe mensagem de alerta na ferramenta"""
 
     colors = {
@@ -12,6 +12,10 @@ def alert(type_, message):
     }
     
     color = colors.get(type_, Colors.TEXT)
+
+    # funciona como uma quebra de linha do alert
+    if br:
+        print()
 
     print(f'{color}[{type_.upper()}] {Colors.TEXT}- {message}')
 

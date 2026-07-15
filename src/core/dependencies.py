@@ -34,7 +34,7 @@ def file_check(file_path):
 def check_all():
     """Verifica todas as dependencias da ferramenta"""
     
-    alert('info', "Verificando as dependências da ferramenta")
+    alert('info', "Verificando as dependências da ferramenta", False)
 
     path_list = [LOG_DIR, JSON_DIR, FFMPEG_DIR, OUTPUT_DIR]
 
@@ -43,9 +43,9 @@ def check_all():
             path.mkdir(exist_ok=True)
 
             time.sleep(0.1)
-            alert('success', f"{path}: ok")
+            alert('success', f"{path}: ok", False)
         
-        alert('info', "Tudo pronto, aguarde alguns segundos...")
+        alert('info', "Tudo pronto, aguarde alguns segundos...", False)
         time.sleep(0.3)
         return True
 
