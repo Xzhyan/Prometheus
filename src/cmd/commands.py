@@ -34,6 +34,10 @@ class CustomShort:
             'list': {
                 'desc': "lista os atalhos adicionados",
                 'handler': self.list_shorts
+            },
+            'remove': {
+                'desc': "remove um atalho",
+                'handler': self.remove
             }
         }
 
@@ -52,9 +56,9 @@ class CustomShort:
 
         data = read_json(SHORTS_JSON)
 
-        for category, short in data.items():
-            for short_name in short:
-                if short_name['name'] == name:
+        for category, shorts in data.items():
+            for short in shorts:
+                if short['name'] == name:
                     alert('info', "já existe um atalho com esse nome")
                     return
 
@@ -75,20 +79,49 @@ class CustomShort:
     def list_shorts(self):
         data = read_json(SHORTS_JSON)
 
-        # lista dos atalhos, para agrupar por categoria
-        app = []
-        dir = []
+        for category, shorts in data.items():
+            print(f"\n{Colors.TEXT}[+] {Colors.ONE}{category}")
 
-        for category, short in data.items():
-            for short_name in short:
-                if category == 'app':
-                    app.append(short_name['name'])
-                else:
-                    dir.append(short_name['name'])
+            for short in shorts:
+                print(f" {Colors.TEXT}↪ {Colors.TITLE}{short['name']}")
+
+        self.running = False
+
+    def remove(self):
+        name = input(f"  {Colors.TEXT}↪ {Colors.TITLE}nome do atalho {Colors.TEXT} > ")
+
+        if not name:
+            response = "todos os campos devem ser preenchidos"
+            addlog('info', f"SHORT_MODULE | {response}")
+            alert('info', response)
+            return
+
+        data = read_json(SHORTS_JSON)
+
+        found = False
+
+        for category, shorts in data.items():
+            for short in shorts:
+                if short['name'] == name:
+                    shorts.remove(short)
+                    found = True
+                    break
+
+            if found:
+                break
+
+        if not found:
+            response = f"esse atalho não existe"
+            addlog('error', response)
+            alert('error', response)
+            return
         
-        print(app)
-        print(dir)
-
+        write_json(SHORTS_JSON, data)
+        
+        response = f"o atalho {name} foi removido"
+        addlog('success', response)
+        alert('success', response)
+        
         self.running = False
 
     def manage(self):
