@@ -41,7 +41,7 @@ def entry():
     if not entry:
         raise InvalidCommandError()
 
-    return entry.split()
+    return entry.lower().split()
 
 
 def run_module(path, name):
