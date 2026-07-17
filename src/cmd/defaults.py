@@ -1,22 +1,15 @@
 import subprocess
 
 # core
-from core import settings
 from core.logger import addlog
 from core.constants import Colors, SHORTS_JSON
-from core.dependencies import path_check
-from core.exceptions import PathNotFoundError, ShortNotFoundError
+from core.exceptions import ShortNotFoundError
 
 # ui
 from ui.ui_console import alert, list_commands
 
 # utils/system
-from utils.system import (
-    shutdown,
-    restart,
-    clear,
-    run_python_module,
-)
+from utils.system import shutdown, restart, clear
 
 # functions
 from utils.functions import read_json, write_json

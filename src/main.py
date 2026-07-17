@@ -11,10 +11,10 @@ from ui.ui_console import alert, list_commands
 # utils
 from utils.system import entry, set_title, shutdown, clear
 
-# commands
-from cmd.commands import DEFAULT_COMMANDS
+# comandos básicos
+from cmd.defaults import DEFAULT_COMMANDS
 
-# special commands
+# comandos especiais
 from cmd.specials import SPECIAL_COMMANDS
 
 class Prometheus:
@@ -36,6 +36,7 @@ class Prometheus:
                 if command == 'help':
                     clear()
                     print(Banners.HELP_MENU)
+
                     list_commands('Comandos normais', DEFAULT_COMMANDS)
                     list_commands('Comandos especiais', SPECIAL_COMMANDS)
 
@@ -59,7 +60,7 @@ class Prometheus:
             except ShortNotFoundError as e:
                 addlog('error', f"SHORT_NOT_FOUND | {e}")
                 alert('error', str(e))
-            
+
             except IndexError:
                 addlog('error', f"INDEX_ERROR | cmd={command} | argumentos faltando")
                 alert('error', f"Faltam argumentos. Use help e leia o modo de uso do comando.")

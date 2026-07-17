@@ -5,6 +5,9 @@ from core import settings
 from core.logger import addlog
 from core.constants import FFMPEG_DIR, OUTPUT_DIR
 
+# ui
+from ui.ui_console import alert
+
 # core/exceptions
 from core.exceptions import ArgumentError
 
@@ -38,14 +41,14 @@ class YoutubeDownloader:
 
     def download_music(self, url):
         ydl_opts = {
-            'format': 'bestaudio/best',
+            'format': "bestaudio/best",
             'ffmpeg_location': FFMPEG_DIR,
             'postprocessors': [{
-                'key': 'FFmpegExtractAudio',
-                'preferredcodec': 'mp3',
-                'preferredquality': '320',
+                'key': "FFmpegExtractAudio",
+                'preferredcodec': "mp3",
+                'preferredquality': "320",
             }],
-            'outtmpl': f'{OUTPUT_DIR}\\%(title)s.%(ext)s',
+            'outtmpl': f"{OUTPUT_DIR}\\%(title)s.%(ext)s",
         }
 
         try:
@@ -54,19 +57,32 @@ class YoutubeDownloader:
 
         except Exception as e:
             addlog('error', str(e))
-            print(str(e))
+            alert('error', str(e))
 
+    def download_video(self, url):
+        ydl_opts = {
+            'format': "bestvideo+bestaudio/best",
+            'outtmpl': f"{OUTPUT_DIR}\\%(title)s.%(ext)s",
+            'merge_output_formart': "mp4"
+        }
+
+        try:
+            with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+                ydl.download([url])
+        
+        except Exception as e:
+            addlog('error', str(e))
+            alert('error', str(e))
 
     def dispatch(self, cmd, url):
         if cmd == 'music':
-            try:
-                self.download_music(url)
-            
-            except Exception as e:
-                print(e)
+            self.download_music(url)
+
+        elif cmd == 'video':
+            self.download_video(url)
 
         else:
-            raise ValueError("o tipo não existe")
+            raise ValueError("os tipos aceitos são [music] e [video]")
 
 
 SPECIAL_COMMANDS = {
