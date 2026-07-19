@@ -1,4 +1,4 @@
-import subprocess
+import subprocess, os, shutil
 
 # core
 from core.logger import addlog
@@ -191,6 +191,10 @@ DEFAULT_COMMANDS = {
     },
     'clear': {
         'desc': "limpar a tela",
+        'handler': clear
+    },
+    'cleartempfiles': {
+        'desc': "limpa os arquivos temporários do sistema",
         'handler': clear
     },
     'short': {
