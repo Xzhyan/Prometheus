@@ -1,4 +1,10 @@
-import os, shutil
+import os, shutil, subprocess, sys, ctypes, time
+from pathlib import Path
+
+# caminho base para corrigir o problema de imports
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
+sys.path.insert(0, str(BASE_DIR))
+
 
 # core
 from core.constants import USERNAME
@@ -54,6 +60,9 @@ def clear_temp_files():
 if __name__ == '__main__':
     try:
         clear_temp_files()
+
+        time.sleep(10)
+        sys.exit()
 
     except KeyboardInterrupt:
         alert('info', "Finalizando...")

@@ -9,7 +9,7 @@ from core.exceptions import ShortNotFoundError
 from ui.ui_console import alert, list_commands
 
 # utils/system
-from utils.system import shutdown, restart, clear, run_python_module
+from utils.system import shutdown, restart, clear, run_module_admin
 
 # functions
 from utils.functions import read_json, write_json
@@ -19,11 +19,7 @@ from utils.functions import read_json, write_json
 def clear_temp_files(*args):
     """Inicia o modulo de limpar arquivos temporários"""
 
-    pass
-
-    # path = BASE_DIR / 'src' / 'cmd' / 'modules' / 
-
-    # run_python_module()
+    run_module_admin(r'src\cmd\modules', 'cleartempfiles.py')
 
 
 class CustomShort:

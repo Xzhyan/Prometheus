@@ -1,4 +1,4 @@
-import subprocess, platform, sys, time
+import subprocess, platform, sys, time, ctypes
 from pathlib import Path
 
 # core, exceptions, dependencies, logger
@@ -53,6 +53,29 @@ def run_module(path, name):
         subprocess.Popen(
             [sys.executable, str(module)],
             creationflags=subprocess.CREATE_NEW_CONSOLE
+        )
+
+    except FilePathNotFoundError as e:
+        addlog('error', str(e))
+        alert('error', str(e))
+
+    except Exception as e:
+        addlog('error', str(e))
+
+
+def run_module_admin(path, name):
+    module = BASE_DIR / path / name
+
+    try:
+        file_check(module)
+
+        ctypes.windll.shell32.ShellExecuteW(
+            None,
+            'runas',
+            sys.executable,
+            f'"{module}"',
+            None,
+            1
         )
 
     except FilePathNotFoundError as e:
