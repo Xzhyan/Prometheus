@@ -2,17 +2,28 @@ import subprocess, os, shutil
 
 # core
 from core.logger import addlog
-from core.constants import Colors, SHORTS_JSON
+from core.constants import Colors, SHORTS_JSON, BASE_DIR
 from core.exceptions import ShortNotFoundError
 
 # ui
 from ui.ui_console import alert, list_commands
 
 # utils/system
-from utils.system import shutdown, restart, clear
+from utils.system import shutdown, restart, clear, run_python_module
 
 # functions
 from utils.functions import read_json, write_json
+
+
+
+def clear_temp_files(*args):
+    """Inicia o modulo de limpar arquivos temporários"""
+
+    pass
+
+    # path = BASE_DIR / 'src' / 'cmd' / 'modules' / 
+
+    # run_python_module()
 
 
 class CustomShort:
@@ -195,7 +206,7 @@ DEFAULT_COMMANDS = {
     },
     'cleartempfiles': {
         'desc': "limpa os arquivos temporários do sistema",
-        'handler': clear
+        'handler': clear_temp_files
     },
     'short': {
         'desc': "inicia o modulo de atalhos",

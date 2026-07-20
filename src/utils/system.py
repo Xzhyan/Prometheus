@@ -68,12 +68,15 @@ def run_python_module(path, *args):
         path = Path(path)
         path_check(path)
         python_venv = path / '.venv' / 'Scripts' / 'python.exe'
-        
-        subprocess.Popen(
-            [str(python_venv), *args],
-            cwd=path,
-            creationflags=subprocess.CREATE_NEW_CONSOLE
-        )
+
+        try:
+            subprocess.Popen(
+                [str(python_venv), *args],
+                cwd=path,
+                creationflags=subprocess.CREATE_NEW_CONSOLE
+            )
+        except Exception as e:
+            print(e)
 
     except FilePathNotFoundError as e:
         addlog('error', str(e))
