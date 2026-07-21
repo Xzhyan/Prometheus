@@ -49,7 +49,7 @@ def run_module(path, name):
 
     try:
         file_check(module)
-        
+
         subprocess.Popen(
             [sys.executable, str(module)],
             creationflags=subprocess.CREATE_NEW_CONSOLE
