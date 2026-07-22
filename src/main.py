@@ -6,16 +6,19 @@ from core.logger import addlog
 
 # ui
 from ui.banners import Banners
-from ui.ui_console import alert, list_commands
+from ui.ui_console import alert
 
 # utils
 from utils.system import entry, set_title, shutdown, clear
 
-# comandos básicos
-from cmd.defaults import DEFAULT_COMMANDS
+# # comandos básicos
+# from cmd.defaults import DEFAULT_COMMANDS
 
-# comandos especiais
-from cmd.specials import SPECIAL_COMMANDS
+# # comandos especiais
+# from cmd.specials import SPECIAL_COMMANDS
+
+from cmd.categories import list_commands, CATEGORIES, DEFAULT_COMMANDS, SPECIAL_COMMANDS
+
 
 class Prometheus:
     def __init__(self):
@@ -36,9 +39,10 @@ class Prometheus:
                 if command == 'help':
                     clear()
                     print(Banners.HELP_MENU)
+                    list_commands('Categorias', CATEGORIES)
 
-                    list_commands('Comandos normais', DEFAULT_COMMANDS)
-                    list_commands('Comandos especiais', SPECIAL_COMMANDS)
+                elif command in CATEGORIES:
+                    CATEGORIES[command]['handler'](args)
 
                 elif command in DEFAULT_COMMANDS:
                     DEFAULT_COMMANDS[command]['handler'](args)
