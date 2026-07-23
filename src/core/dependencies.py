@@ -2,7 +2,7 @@ import pathlib, time
 from pathlib import Path
 
 # constants/paths
-from .constants import LOG_DIR, JSON_DIR, FFMPEG_DIR, OUTPUT_DIR
+from .constants import LOG_DIR, JSON_DIR, FFMPEG_DIR, OUTPUT_DIR, SHORTS_JSON
 
 # core/exceptions
 from .exceptions import PathNotFoundError, FilePathNotFoundError
@@ -30,7 +30,6 @@ def file_check(file_path):
     else:
         return True
 
-
 def check_all():
     """Verifica todas as dependencias da ferramenta"""
     
@@ -51,3 +50,5 @@ def check_all():
 
     except Exception as e:
         alert('error', str(e))
+
+
