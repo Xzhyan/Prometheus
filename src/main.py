@@ -17,7 +17,7 @@ from utils.system import entry, set_title, shutdown, clear
 # # comandos especiais
 # from cmd.specials import SPECIAL_COMMANDS
 
-from cmd.categories import list_commands, CATEGORIES, DEFAULT_COMMANDS, SPECIAL_COMMANDS
+from cmd.categories import list_commands, CATEGORIES, DEFAULT_COMMANDS, SPECIAL_COMMANDS, SELF_DEFENSE
 
 
 class Prometheus:
@@ -49,6 +49,9 @@ class Prometheus:
 
                 elif command in SPECIAL_COMMANDS:
                     SPECIAL_COMMANDS[command]['handler'](args)
+
+                elif command in SELF_DEFENSE:
+                    SELF_DEFENSE[command]['handler'](args)
 
                 else:
                     raise CommandNotFoundError()
