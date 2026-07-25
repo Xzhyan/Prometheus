@@ -18,8 +18,11 @@ class Settings(BaseSettings):
     EASY_PATH: Path
     EASY_SERVER_IP: str
 
+    # SelfDefense
     BIT_LINK_CHECKER_URL: AnyUrl
     VIRUS_TOTAL_URL: AnyUrl
+    BITWARDEN: AnyUrl
+    PROTON_VPN: AnyUrl
 
 
     model_config = SettingsConfigDict(
