@@ -19,19 +19,19 @@ def open_url_link(url):
 
 SELF_DEFENSE = {
     'link-checker': {
-        'desc': "Bitdefender: verificador de link malicioso",
+        'desc': "bitdefender: verificador de link malicioso",
         'handler': lambda url: open_url_link(settings.BIT_LINK_CHECKER_URL)
     },
     'virus-total': {
-        'desc': "VirusTotal: verificar urls e arquivos maliciosos",
+        'desc': "virustotal: verificar urls e arquivos maliciosos",
         'handler': lambda url: open_url_link(settings.VIRUS_TOTAL_URL)
     },
     'bitwarden': {
-        'desc': "Cofre e gerenciador de credenciais gratuito",
+        'desc': "cofre e gerenciador de credenciais gratuito",
         'handler': lambda url: open_url_link(settings.BITWARDEN)
     },
     'protonvpn': {
-        'desc': "Aplicativo de VPN com acesso gratuito",
+        'desc': "aplicativo de VPN com acesso gratuito",
         'handler': lambda url: open_url_link(settings.PROTON_VPN)
     }
 }

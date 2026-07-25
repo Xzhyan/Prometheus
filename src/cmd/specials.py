@@ -1,9 +1,10 @@
 import yt_dlp
+import webview
 
 # core
 from core import settings
 from core.logger import addlog
-from core.constants import FFMPEG_DIR, OUTPUT_DIR
+from core.constants import FFMPEG_DIR, OUTPUT_DIR, MONITOR_HTML
 
 # ui
 from ui.ui_console import alert
@@ -13,6 +14,32 @@ from core.exceptions import ArgumentError
 
 # utils/system
 from utils.system import run_python_module
+
+
+
+class Monitor:
+    def __init__(self, *args):
+        self.window = None
+
+    def create_window(self):
+        self.window = webview.create_window(
+            title="Monitor do sistema",
+            url=MONITOR_HTML.as_uri(),
+            width=400,
+            height=300,
+            x=0,
+            y=30,
+            transparent=True,
+        )
+
+    def start_window(self):
+        self.create_window()
+        webview.start(debug=False)
+
+
+def sysinfo(*args):
+    monitor = Monitor()
+    monitor.start_window()
 
 
 def easy_sharing(*args):
@@ -93,5 +120,9 @@ SPECIAL_COMMANDS = {
     'yt': {
         'desc': "faz download de conteúdos do YouTube",
         'handler': lambda args: YoutubeDownloader(args)
+    },
+    'sysinfo': {
+        'desc': "exibe informações do sistema",
+        'handler': sysinfo
     }
 }

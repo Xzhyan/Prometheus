@@ -34,6 +34,11 @@ OUTPUT_DIR = BASE_DIR / 'bin' / 'output'
 SHORTS_JSON = 'shorts.json'
 
 
+# -------- ASSETS --------#
+
+MONITOR_HTML = BASE_DIR / 'src' / 'ui' / 'assets' / 'monitor.html'
+
+
 # -------- CORES -------- #
 
 class Colors:
