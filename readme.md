@@ -23,6 +23,16 @@
 
 ### Sobre o Projeto
 
+- Visão geral
+    > A ferramenta visa automatizar processos e tarefas no Windows, proporcionando ao usuário mais comodidade e produtividade.
+    Ela está em estágios iniciais de desenvolvimento, mas já conta com diversas funcionalidades, entre elas:
+
+        1. Sistema de atalhos para abrir pastas e aplicativos apenas digitando o nome no prompt;
+        2. Limpeza de arquivos temporarios;
+        3. EasySharing (sistema web para FTP, igual a drive)/
+        4. Self-defense (alguns instrumentos para ajudar a proteger seu computador/usuário);
+
+
 ---
 
 ### Composição do Projeto
