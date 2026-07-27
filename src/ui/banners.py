@@ -8,7 +8,7 @@ class Banners:
                             ┏┓┳┓┏┓┳┳┓┏┓┏┳┓┓┏┏┓┳┳┏┓
                             ┃┃┣┫┃┃┃┃┃┣  ┃ ┣┫┣ ┃┃┗┓
                             ┣┛┛┗┗┛┛ ┗┗┛ ┻ ┛┗┗┛┗┛┗┛
-                        {Colors.TEXT}Developed by {Colors.TITLE}{settings.AUTHOR} {Colors.TEXT}- ver: {Colors.TITLE}{settings.VERSION}"""
+             {Colors.TEXT}Developed by {Colors.TITLE}{settings.AUTHOR} {Colors.TEXT}- ver: {Colors.TITLE}{settings.VERSION}"""
 
     HELP_MENU = f"""{Colors.TEXT}
                Bem-vindo ao menu de ajuda da ferramenta {Colors.TITLE}{settings.TOOL_NAME}{Colors.TEXT}

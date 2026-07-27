@@ -2,6 +2,8 @@
 
 > A ferramenta Prometheus está sendo desenvolvida com o objetivo de automatizar tarefas e auxiliar o usuário, proporcionando maior agilidade, eficiência e produtividade no sistema operacional Windows 10/11.
 
+![Logo do projeto](bin/image.png)
+
 ---
 
 ## ⚠️ Atenção
