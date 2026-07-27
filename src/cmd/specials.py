@@ -121,8 +121,8 @@ SPECIAL_COMMANDS = {
         'desc': "faz download de conteúdos do YouTube",
         'handler': lambda args: YoutubeDownloader(args)
     },
-    'sysinfo': {
-        'desc': "exibe informações do sistema",
-        'handler': sysinfo
-    }
+    # 'sysinfo': {
+    #     'desc': "exibe informações do sistema",
+    #     'handler': sysinfo
+    # }
 }

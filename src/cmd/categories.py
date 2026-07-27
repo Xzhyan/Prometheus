@@ -16,7 +16,7 @@ def list_specials(*args):
 
 
 def list_self_defense(*args):
-    list_commands('Comandos Especiais', SELF_DEFENSE)
+    list_commands('Comandos de Auto-defesa', SELF_DEFENSE)
 
 
 CATEGORIES = {
