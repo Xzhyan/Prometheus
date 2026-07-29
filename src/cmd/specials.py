@@ -1,5 +1,4 @@
-import yt_dlp
-import webview
+import yt_dlp, webview, subprocess
 
 # core
 from core import settings
@@ -69,6 +68,7 @@ class YoutubeDownloader:
     def download_music(self, url):
         ydl_opts = {
             'js_runtimes': {
+                'deno': {'path': None},
                 'none': {'path': "C:\\nvm4w\\nodejs\\node.exe"}
             },
             'quiet': False,
