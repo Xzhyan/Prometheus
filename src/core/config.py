@@ -9,6 +9,7 @@ class Settings(BaseSettings):
     # Configuração da ferramenta
     TOOL_NAME: str
     AUTHOR: str
+    TEAM: str
     VERSION: str
     LANG: str
     DESC: str

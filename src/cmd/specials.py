@@ -68,6 +68,10 @@ class YoutubeDownloader:
 
     def download_music(self, url):
         ydl_opts = {
+            'js_runtimes': {
+                'none': {'path': "C:\\nvm4w\\nodejs\\node.exe"}
+            },
+            'quiet': False,
             'format': "bestaudio/best",
             'ffmpeg_location': FFMPEG_DIR,
             'postprocessors': [{

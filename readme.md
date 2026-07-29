@@ -61,35 +61,35 @@ Requisitos: Windows 10/11 e Python 3.14.2 ou superior instalado
 Download:
     Use git clone para clonar o repositório em um diretório de sua preferência
 
-    ```bash
+    ````bash
     git clone https://github.com/Xzhyan/Prometheus.git
-    ```
+    ````
 
 Instalação:
 
     1. Acesse a pasta clonada
 
-    ```bash
+    ````bash
     cd Prometheus
-    ```
+    ````
 
     2. Crie um novo ambiente virtual
 
-    ```bash
+    ````bash
     python -m venv .venv
-    ```
+    ````
 
     3. Ative o ambiente virutal
 
-    ```bash
+    ````bash
     .venv\Scripts\activate
-    ```
+    ````
 
     4. Instale as libs python
 
-    ```bash
+    ````bash
     pip install -r requirements.txt
-    ```
+    ````
 
 > Agora é só configurar...
 
@@ -107,21 +107,21 @@ Configurando o EasySharing (apenas se você fizer uso do mesmo)
 
     2. Edite o arquivo '.env' no seguinte trecho, alterando as informações
 
-    ```bash
+    ````env
     # EasySharing
     EASY_PATH="" # aqui vai o caminho absoluto do seu EasySharing
     EASY_SERVER_IP= # aqui vai o IP local da sua máquina (PC) na porta 8000, ex: 192.168.0.10:8000
-    ```
+    ````
 
 Se você notar problemas com os seguintes links, você pode atualizar eles manualmente
 
-    ```bash
+    ````env
     # SelfDefense
     BIT_LINK_CHECKER_URL = 'https://www.bitdefender.com/en-us/consumer/link-checker'
     VIRUS_TOTAL_URL = 'https://www.virustotal.com/gui/home/upload'
     BITWARDEN = 'https://bitwarden.com/'
     PROTON_VPN = 'https://protonvpn.com/'
-    ```
+    ````
 
 ---
 
